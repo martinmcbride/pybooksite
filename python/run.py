@@ -9,6 +9,8 @@ import create_site
 
 config = config.load_config()
 pages = pages.load_pages(config)
-create_site.copy_site_pages(config, "public")
+
+template = create_site.read_template(config)
+create_site.copy_site_pages(config, template, "public", pages)
 print(config)
 print(pages)
