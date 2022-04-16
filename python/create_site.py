@@ -6,27 +6,30 @@
 import shutil, os
 import pystache
 
-def create_url(base, page):
-    directory = os.path.join(base, page.path)
+def create_url(base, path):
+    directory = os.path.join(base, path)
     html_name = 'index.html'
     html_path = os.path.join(directory, html_name)
     return directory, html_path
 
-def read_template(config):
+def read_html_template(config):
     try:
-        with open(config["template"]) as infile:
+        theme = config["theme"]
+        template_path = os.path.join("themes", theme, "template.html")
+        with open(template_path) as infile:
             template = ''.join(infile)
     except Exception as e:
-        print("Error reading template file", config["template"])
+        print("Error reading template file", template_path)
         print(e)
         raise
 
     return template
 
 
-def write_page(config, template, public_path, page, pages):
+def write_page(config, html_template, public_path, page, pages):
 
-    html = pystache.render(template, page)
+    html = pystache.render(html_template, page)
+    print("!!!", page)
 
     directory, html_path = create_url(public_path, page["path"])
     try:
@@ -40,16 +43,16 @@ def write_page(config, template, public_path, page, pages):
 
 
 
-def write_site_pages(config, public_path, pages_list):
+def write_site_pages(config, html_template, public_path, pages_list):
 
     try:
         shutil.rmtree(public_path, ignore_errors=False, onerror=None)
     except Exception as e:
         print("Failed to delete public area", public_path)
         print(e)
-        raise
 
+    print(pages_list)
     for pages in pages_list:
         for page in pages:
-            write_page(config, public_path, page, pages)
+            write_page(config,html_template, public_path, page, pages)
 

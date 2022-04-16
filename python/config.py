@@ -17,7 +17,7 @@ def load_config():
     :return: Config object (a dictionary of items
     """
     try:
-        with open("./config.yaml") as infile:
+        with open("config.yaml") as infile:
             yaml_data = ''.join(infile)
         config = yaml.load(yaml_data, yaml.SafeLoader)
     except Exception as e:
