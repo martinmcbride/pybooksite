@@ -4,3 +4,4 @@ __pycache__
 .pydevproject
 /.idea/
 /scratch/
+sample-site/public/

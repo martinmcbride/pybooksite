@@ -11,6 +11,6 @@ config = config.load_config()
 pages = pages.load_pages(config)
 
 html_template = create_site.read_html_template(config)
-create_site.write_site_pages(config, html_template, "public", [pages])
+create_site.generate_site(config, html_template, "public", [pages])
 print(config)
 print(pages)
