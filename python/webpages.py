@@ -7,7 +7,7 @@ import os
 import yaml
 import markdown
 
-def read_page_file(base, path, name):
+def read_webpage_file(base, path, name):
     """
     Read a page file consisting of a yaml header and a markdown body (both optional)
 
@@ -86,7 +86,7 @@ def convert_markdown_to_html(markdown_data, path, name):
     return html
 
 
-def create_page_dictionary(yaml_dict, html, path, name):
+def create_webpage_dictionary(yaml_dict, html, path, name):
     """
     Create a page dictionary. This is basically the yaml_dict with:
 
@@ -98,7 +98,7 @@ def create_page_dictionary(yaml_dict, html, path, name):
     :param html: page markdown converted to html (the page content)
     :param path: path of this page within the content area
     :param name: name of md file
-    :return: page dictionary - final destination of the file in the
+    :return: webpage dictionary - final destination of the file in the
     """
 
     # Add the content
@@ -122,7 +122,7 @@ def create_page_dictionary(yaml_dict, html, path, name):
 
     return yaml_dict
 
-def load_page(config, base, path, name):
+def load_webpage(config, base, path, name):
     """
     Load a page md file
     :param config: main site configuration config.yaml
@@ -131,7 +131,7 @@ def load_page(config, base, path, name):
     :param name: name of md file
     :return: A page dictionary, or None if the page should be ignored (eg if draft is true)
     """
-    yaml_data, markdown_data = read_page_file(base, path, name)
+    yaml_data, markdown_data = read_webpage_file(base, path, name)
 
     yaml_dict = parse_yaml(yaml_data, path, name)
 
@@ -143,10 +143,10 @@ def load_page(config, base, path, name):
     title = yaml_dict.get('title', '')
     series = '' if not yaml_dict.get('series') else yaml_dict.get('series')[0]
 
-    page_dict = create_page_dictionary(yaml_dict, html, path, name)
-    return page_dict
+    webpage_dict = create_webpage_dictionary(yaml_dict, html, path, name)
+    return webpage_dict
 
-def load_pages(config):
+def load_webpages(config):
     """
     Load all md files under the content folder.
     :param config: main site configuration config.yaml
@@ -159,7 +159,7 @@ def load_pages(config):
             path = subdir[len(base)+1:]
             print(">>>", base, path, filename)
             if filename.endswith(".md"):
-                page = load_page(config, base, path, filename)
+                page = load_webpage(config, base, path, filename)
                 if page:
                     pages.append(page)
     return pages

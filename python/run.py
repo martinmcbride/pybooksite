@@ -4,13 +4,17 @@
 # License: MIT
 
 import config
-import pages
+import webpages
 import create_site
+import create_site_structure
 
 config = config.load_config()
-pages = pages.load_pages(config)
+pages = webpages.load_webpages(config)
 
 html_template = create_site.read_html_template(config)
+site_structure = create_site_structure.create_site_structure(pages)
 create_site.generate_site(config, html_template, "public", [pages])
+
+print(site_structure)
 print(config)
 print(pages)

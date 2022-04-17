@@ -36,20 +36,20 @@ def read_html_template(config):
 
     return template
 
-def write_page(config, html_template, public_path, page, pages):
+def write_webpage(config, html_template, public_path, webpage, webpages):
     """
     Write the page HTML to the correct place in the output folder, creating any necessary subfolder.
     :param config:
     :param html_template: HTML data for file
     :param public_path: Output folder
-    :param page: Page information
-    :param pages: All pages
+    :param webpage: Page information
+    :param webpages: All pages
     :return:
     """
 
-    html = pystache.render(html_template, page)
+    html = pystache.render(html_template, webpage)
 
-    directory, html_path = get_public_path_for_page(public_path, page["path"])
+    directory, html_path = get_public_path_for_page(public_path, webpage["path"])
     try:
         os.makedirs(directory, exist_ok=True)
         with open(html_path, 'w') as outfile:
@@ -98,7 +98,7 @@ def copytree(src, dst):
         raise shutil.Error(errors)
 
 
-def copy_static_pages(config, public_path):
+def copy_static_files(config, public_path):
     """
     Copy all static pages to output area
     :param config:
@@ -115,13 +115,13 @@ def copy_static_pages(config, public_path):
     copytree(theme_static_path, public_path)
 
 
-def write_site_pages(config, html_template, public_path, pages_list):
+def write_site_webpages(config, html_template, public_path, webpages_list):
     """
     Write out all pages
     :param config:
     :param html_template:
     :param public_path:
-    :param pages_list:
+    :param webpages_list:
     :return:
     """
 
@@ -133,7 +133,7 @@ def write_site_pages(config, html_template, public_path, pages_list):
 
     for pages in pages_list:
         for page in pages:
-            write_page(config, html_template, public_path, page, pages)
+            write_webpage(config, html_template, public_path, webpage, webpages)
 
 
 def generate_site(config, html_template, public_path, pages_list):
@@ -145,5 +145,5 @@ def generate_site(config, html_template, public_path, pages_list):
     :param pages_list:
     :return:
     """
-    write_site_pages(config, html_template, public_path, pages_list)
-    copy_static_pages(config, public_path)
+    write_site_webpages(config, html_template, public_path, pages_list)
+    copy_static_files(config, public_path)
