@@ -4,7 +4,7 @@ title: Advanced Python Page 1
 date: 2022-03-16
 type: page
 book: python
-chapter: introduction
+chapter: advanced
 tags:
  - advanced python
 categories:

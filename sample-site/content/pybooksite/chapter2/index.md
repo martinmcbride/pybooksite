@@ -3,7 +3,7 @@ author: B Writer
 title: Advanced pybooksite
 type: chapter
 book: pybooksite
-chapter: chapter1
+chapter: chapter2
 tags:
  - pybooksite 2
 categories:
