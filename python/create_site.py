@@ -131,19 +131,19 @@ def write_site_webpages(config, html_template, public_path, webpages_list):
         print("Failed to delete public area", public_path)
         print(e)
 
-    for pages in pages_list:
-        for page in pages:
+    for webpages in webpages_list:
+        for webpage in webpages:
             write_webpage(config, html_template, public_path, webpage, webpages)
 
 
-def generate_site(config, html_template, public_path, pages_list):
+def generate_site(config, html_template, public_path, webpages_list):
     """
     Create all pages and copy all static files to public area
     :param config:
     :param html_template:
     :param public_path:
-    :param pages_list:
+    :param webpages_list:
     :return:
     """
-    write_site_webpages(config, html_template, public_path, pages_list)
+    write_site_webpages(config, html_template, public_path, webpages_list)
     copy_static_files(config, public_path)
