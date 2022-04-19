@@ -1,14 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
+<head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{site}} - {{title}}</title>
-  </head>
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
 
-  <body>
-  <h1>{{title}}</h1>
-  {{content}}
-  {{copyright}}
-  </body>
+<body>
+<div id="page">
+    <div id="header">
+        <a href="/"><p id="title">PythonInformer</p></a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a href="#/">Item 1</a>
+            </li>
+            <li class="nav-item"><a href="#/">Item 2</a>
+            </li>
+        </ul>
+    </div>
+    <div id="content">
+        <div id="article">
+            <h1>{{title}}</h1>
+            {{content}}
+        </div>
+        <div id="sidebar">
+            {{{toc}}}
+        </div>
+    </div>
+    <div id="footer">
+        <p>{{copyright}}</p>
+    </div>
+</div>
+</body>
+
 </html>
