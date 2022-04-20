@@ -72,3 +72,19 @@ def create_site_structure(webpages):
     add_pages_to_site_structure(webpages, site_structure)
     dump_site_structure(site_structure)
     return site_structure
+
+def get_toc_for_webpage(site_structure, webpage):
+    toc = []
+    book = webpage.get("book", None)
+    print("##########################")
+    if not book:
+        return toc
+
+    book_content = site_structure[book]
+    for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
+        print("###", chapter)
+        for page, page_content in sorted(chapter_content.children.items(), key=lambda x: x[1].weight):
+            print("####", page)
+
+
+

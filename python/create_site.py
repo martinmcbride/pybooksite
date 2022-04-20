@@ -5,6 +5,7 @@
 
 import shutil, os
 import pystache
+import create_site_structure
 
 def get_public_path_for_page(public_path, filepath):
     """
@@ -36,7 +37,7 @@ def read_html_template(config):
 
     return template
 
-def write_webpage(config, html_template, public_path, webpage, webpages):
+def write_webpage(config, html_template, public_path, webpage, site_structure):
     """
     Write the page HTML to the correct place in the output folder, creating any necessary subfolder.
     :param config:
@@ -46,6 +47,8 @@ def write_webpage(config, html_template, public_path, webpage, webpages):
     :param webpages: All pages
     :return:
     """
+
+    create_site_structure.get_toc_for_webpage(site_structure, webpage)
 
     html = pystache.render(html_template, webpage)
 
@@ -115,7 +118,7 @@ def copy_static_files(config, public_path):
     copytree(theme_static_path, public_path)
 
 
-def write_site_webpages(config, html_template, public_path, webpages_list):
+def write_site_webpages(config, html_template, public_path, webpages_list, site_structure):
     """
     Write out all pages
     :param config:
@@ -133,10 +136,10 @@ def write_site_webpages(config, html_template, public_path, webpages_list):
 
     for webpages in webpages_list:
         for webpage in webpages:
-            write_webpage(config, html_template, public_path, webpage, webpages)
+            write_webpage(config, html_template, public_path, webpage, site_structure)
 
 
-def generate_site(config, html_template, public_path, webpages_list):
+def generate_site(config, html_template, public_path, webpages_list, site_structure):
     """
     Create all pages and copy all static files to public area
     :param config:
@@ -145,5 +148,5 @@ def generate_site(config, html_template, public_path, webpages_list):
     :param webpages_list:
     :return:
     """
-    write_site_webpages(config, html_template, public_path, webpages_list)
+    write_site_webpages(config, html_template, public_path, webpages_list, site_structure)
     copy_static_files(config, public_path)
