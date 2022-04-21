@@ -110,7 +110,6 @@ def create_webpage_dictionary(yaml_dict, html, path, name):
     name = os.path.splitext(name)[0]
     if name!='index':
         path = "/".join((path, name))
-    print("PATH", path)
     yaml_dict["path"] = path
 
 

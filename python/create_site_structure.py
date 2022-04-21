@@ -28,7 +28,6 @@ def add_chapters_to_site_structure(webpages, site_structure):
                 if webpage.get("book", None) in site_structure:
                     if webpage.get("chapter", None) in site_structure[webpage["book"]].children:
                         print("More than one chapter named", webpage.get("chapter", None))
-                        print(site_structure[webpage["book"]].children)
                         raise Exception()
                     else:
                         site_structure[webpage["book"]].children[webpage["chapter"]] = PageItem(webpage, webpage.get("weight", 0), dict())
@@ -53,7 +52,6 @@ def add_pages_to_site_structure(webpages, site_structure):
                 print("Page missing a book or chapter entry", webpage.get("path", "unknown path"))
                 raise Exception()
 
-
 def dump_site_structure(site_structure):
     for book, book_content in site_structure.items():
         print(book)
@@ -67,7 +65,6 @@ def create_site_structure(webpages):
     add_books_to_site_structure(webpages, site_structure)
     add_chapters_to_site_structure(webpages, site_structure)
     add_pages_to_site_structure(webpages, site_structure)
-    dump_site_structure(site_structure)
     return site_structure
 
 def get_toc_for_webpage(site_structure, webpage):
@@ -79,10 +76,8 @@ def get_toc_for_webpage(site_structure, webpage):
     book_content = site_structure[book]
     for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
         toc.append(dict(style="chapter_toc", title=chapter_content.item.get("title", ""), link="/" + chapter_content.item.get("path", "")))
-        print("@@", chapter_content.item.get("title", ""), chapter_content.item.get("path", ""))
         for page, page_content in sorted(chapter_content.children.items(), key=lambda x: x[1].weight):
             toc.append(dict(style="page_toc", title=page_content.item.get("title", ""), link="/" + page_content.item.get("path", "")))
-            print("@@@", page_content.item.get("title", ""), page_content.item.get("path", ""))
 
     return toc
 
