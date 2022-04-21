@@ -110,6 +110,7 @@ def create_webpage_dictionary(yaml_dict, html, path, name):
     name = os.path.splitext(name)[0]
     if name!='index':
         path = "/".join((path, name))
+    print("PATH", path)
     yaml_dict["path"] = path
 
 
@@ -154,7 +155,6 @@ def load_webpages(config):
     for subdir, dirs, files in os.walk(base):
         for filename in files:
             path = subdir[len(base)+1:]
-            print(">>>", base, path, filename)
             if filename.endswith(".md"):
                 page = load_webpage(config, base, path, filename)
                 if page:

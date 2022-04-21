@@ -78,9 +78,11 @@ def get_toc_for_webpage(site_structure, webpage):
 
     book_content = site_structure[book]
     for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
-        toc.append(dict(style="chapter_toc", title=chapter_content.item.get("title", ""), link=chapter_content.item.get("path", "")))
+        toc.append(dict(style="chapter_toc", title=chapter_content.item.get("title", ""), link="/" + chapter_content.item.get("path", "")))
+        print("@@", chapter_content.item.get("title", ""), chapter_content.item.get("path", ""))
         for page, page_content in sorted(chapter_content.children.items(), key=lambda x: x[1].weight):
-            toc.append(dict(style="page_toc", title=page_content.item.get("title", ""), link=page_content.item.get("path", "")))
+            toc.append(dict(style="page_toc", title=page_content.item.get("title", ""), link="/" + page_content.item.get("path", "")))
+            print("@@@", page_content.item.get("title", ""), page_content.item.get("path", ""))
 
     return toc
 

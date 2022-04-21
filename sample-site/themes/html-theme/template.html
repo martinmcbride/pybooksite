@@ -19,12 +19,12 @@
     <div id="content">
         <div id="article">
             <h1>{{title}}</h1>
-            {{content}}
+            {{{content}}}
         </div>
         <div id="sidebar">
             <ol>
                 {{#toc}}
-                <li><a class="{{style}}" href="{{path}}">{{title}}</a></li>
+                <li><a class="{{style}}" href="{{link}}">{{title}}</a></li>
                 {{/toc}}
             </ol>
         </div>
