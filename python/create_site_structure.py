@@ -55,15 +55,12 @@ def add_pages_to_site_structure(webpages, site_structure):
 
 
 def dump_site_structure(site_structure):
-    print("==========")
     for book, book_content in site_structure.items():
         print(book)
         for chapter, chapter_content in book_content.children.items():
             print(" ", chapter)
             for page, page_content in chapter_content.children.items():
                 print("   ", page)
-
-    print("==========")
 
 def create_site_structure(webpages):
     site_structure = dict()
@@ -76,15 +73,14 @@ def create_site_structure(webpages):
 def get_toc_for_webpage(site_structure, webpage):
     toc = []
     book = webpage.get("book", None)
-    print("##########################")
     if not book:
         return toc
 
     book_content = site_structure[book]
     for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
-        print("###", chapter)
+        toc.append(dict(style="chapter_toc", title=chapter_content.item.get("title", ""), link=chapter_content.item.get("path", "")))
         for page, page_content in sorted(chapter_content.children.items(), key=lambda x: x[1].weight):
-            print("####", page)
+            toc.append(dict(style="page_toc", title=page_content.item.get("title", ""), link=page_content.item.get("path", "")))
 
-
+    return toc
 

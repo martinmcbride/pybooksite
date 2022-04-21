@@ -48,7 +48,8 @@ def write_webpage(config, html_template, public_path, webpage, site_structure):
     :return:
     """
 
-    create_site_structure.get_toc_for_webpage(site_structure, webpage)
+    toc = create_site_structure.get_toc_for_webpage(site_structure, webpage)
+    webpage["toc"] = toc
 
     html = pystache.render(html_template, webpage)
 

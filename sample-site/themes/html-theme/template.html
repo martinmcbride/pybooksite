@@ -22,7 +22,11 @@
             {{content}}
         </div>
         <div id="sidebar">
-            {{{toc}}}
+            <ol>
+                {{#toc}}
+                <li><a class="{{style}}" href="{{path}}">{{title}}</a></li>
+                {{/toc}}
+            </ol>
         </div>
     </div>
     <div id="footer">

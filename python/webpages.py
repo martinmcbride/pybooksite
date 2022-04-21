@@ -140,9 +140,6 @@ def load_webpage(config, base, path, name):
 
     html = convert_markdown_to_html(markdown_data, path, name)
 
-    title = yaml_dict.get('title', '')
-    series = '' if not yaml_dict.get('series') else yaml_dict.get('series')[0]
-
     webpage_dict = create_webpage_dictionary(yaml_dict, html, path, name)
     return webpage_dict
 
