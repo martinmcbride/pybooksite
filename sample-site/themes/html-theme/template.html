@@ -3,6 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{site}} - {{title}}</title>
     <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/pbs.css" rel="stylesheet">
 </head>
 
 <body>
@@ -22,11 +23,11 @@
             {{{content}}}
         </div>
         <div id="sidebar">
-            <ol>
+            <ul class="toc">
                 {{#toc}}
-                <li><a class="{{style}}" href="{{link}}">{{title}}</a></li>
+                <li><a href="{{link}}"><span class="{{style}}">{{title}}</span></a></li>
                 {{/toc}}
-            </ol>
+            </ul>
         </div>
     </div>
     <div id="footer">
