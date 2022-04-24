@@ -6,7 +6,6 @@
 month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ]
 
 def get_month_year(date):
-    print("$$", date, "$$")
     month = int(date[5:7]) - 1
     return month_names[month] + ' ' + date[0:4]
 

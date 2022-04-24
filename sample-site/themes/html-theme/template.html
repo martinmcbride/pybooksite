@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{site}} - {{title}}</title>
+    <title>{{site-name}} - {{title}}</title>
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/pbs.css" rel="stylesheet">
 </head>
@@ -11,10 +11,9 @@
     <div id="header">
         <a href="/"><p id="title">PythonInformer</p></a>
         <ul class="navbar-nav">
-            <li class="nav-item"><a href="#/">Item 1</a>
-            </li>
-            <li class="nav-item"><a href="#/">Item 2</a>
-            </li>
+            {{#menu}}
+            <li class="nav-item"><a href="{{link}}">{{title}}</a></li>
+            {{/menu}}
         </ul>
     </div>
     <div id="content">
@@ -28,11 +27,18 @@
                 <li><a href="{{link}}"><span class="{{style}}">{{title}}</span></a></li>
                 {{/toc}}
             </ul>
+            <div class="sidebar-title">See also</div>
             <ul class="toc">
                  <li><a href="/recent/"><span class="page-toc">Recent pages</span></a></li>
                  <li><a href="/all/"><span class="page-toc">All pages</span></a></li>
                  <li><a href="/tags/"><span class="page-toc">Tags</span></a></li>
                  <li><a href="/categories/"><span class="page-toc">Categories</span></a></li>
+            </ul>
+            <div class="sidebar-title">Links</div>
+            <ul class="toc">
+                {{#social}}
+                 <li><a href="{{link}}"><span class="page-toc">{{title}}</span></a></li>
+                {{/social}}
             </ul>
         </div>
     </div>
@@ -40,6 +46,22 @@
         <p>{{copyright}}</p>
     </div>
 </div>
+{{#googleanalytics}}
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '{{googleanalytics}}', 'auto');
+      ga('send', 'pageview');
+    </script>
+{{/googleanalytics}}
+{{#mathjax}}
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+{{/mathjax}}
 </body>
 
 </html>

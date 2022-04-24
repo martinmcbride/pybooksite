@@ -1,3 +1,13 @@
 theme: html-theme
-site: test-site
+site-name: test-site
+site-url: https://www.example.com
 copyright: Copyright pybooksite 2022
+menu:
+  Home: /
+  About: /about/
+  Books: /books/
+googleanalytics: XXXXXXX-GA
+mathjax: true
+social:
+  Twitter: twitter.com
+  Github: github.com

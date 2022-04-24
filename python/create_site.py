@@ -49,14 +49,14 @@ def write_webpage(config, html_template, public_path, webpage, site_structure):
     :return:
     """
 
+    dynamic_config = dict()
     toc = create_site_structure.get_toc_for_webpage(site_structure, webpage)
-    webpage["toc"] = toc
+    dynamic_config["toc"] = toc
 
-    html = pystache.render(html_template, webpage)
+    html = pystache.render(html_template, {**webpage, **config, **dynamic_config})
 
     directory, html_path = get_public_path_for_page(public_path, webpage["path"])
     try:
-        print(webpage["path"], directory, html_path)
         os.makedirs(directory, exist_ok=True)
         with open(html_path, 'w') as outfile:
             outfile.write(html)
