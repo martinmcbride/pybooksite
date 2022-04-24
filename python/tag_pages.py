@@ -3,8 +3,6 @@
 # Copyright (c) 2022, Martin McBride
 # License: MIT
 
-import os
-
 def create_tag_linkname(tag):
     return 'tag-' + tag.replace(' ', '-')
 
