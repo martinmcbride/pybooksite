@@ -6,6 +6,7 @@
 import shutil, os
 import pystache
 import create_site_structure
+import create_site_map
 
 def get_public_path_for_page(public_path, filepath):
     """
@@ -141,7 +142,7 @@ def write_site_webpages(config, html_template, public_path, webpages_list, site_
             write_webpage(config, html_template, public_path, webpage, site_structure)
 
 
-def generate_site(config, html_template, public_path, webpages_list, site_structure):
+def generate_site(config, html_template, public_path, webpages_list, site_structure, site_url):
     """
     Create all pages and copy all static files to public area
     :param config:
@@ -152,3 +153,4 @@ def generate_site(config, html_template, public_path, webpages_list, site_struct
     """
     write_site_webpages(config, html_template, public_path, webpages_list, site_structure)
     copy_static_files(config, public_path)
+    create_site_map.create_site_map(webpages_list[0], public_path, site_url)
