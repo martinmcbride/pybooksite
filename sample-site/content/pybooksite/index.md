@@ -1,6 +1,6 @@
 ---
 author: B Writer
-title: pybooksite book
+title: pybooksite
 date: 2022-03-16
 type: book
 book: pybooksite

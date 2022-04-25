@@ -18,20 +18,34 @@
     <div id="content">
         <div id="article">
             <h1>{{title}}</h1>
+            {{#author}}
+            <div class="article-details">{{.}}</div>
+            {{/author}}
+            {{#date}}
+            <div class="article-details">{{.}}</div>
+            {{/date}}
+            <ul class="navbar-nav">
+            {{#tag-items}}
+            <li class="nav-item"><a class="nav-item" href="{{link}}">{{title}}</a></li>
+            {{/tag-items}}
+            </ul>
             {{{content}}}
         </div>
         <div id="sidebar">
+            {{#toc-title}}
+            <div class="sidebar-title">{{.}}</div>
+            {{/toc-title}}
             <ul class="toc">
                 {{#toc}}
                 <li><a href="{{link}}"><span class="{{style}}">{{title}}</span></a></li>
                 {{/toc}}
             </ul>
-            <div class="sidebar-title">See also</div>
+            <div class="sidebar-title">Site</div>
             <ul class="toc">
-                 <li><a href="/recent/"><span class="page-toc">Recent pages</span></a></li>
-                 <li><a href="/all/"><span class="page-toc">All pages</span></a></li>
+                 <li><a href="/recent/"><span class="page-toc">Recent</span></a></li>
                  <li><a href="/tags/"><span class="page-toc">Tags</span></a></li>
                  <li><a href="/categories/"><span class="page-toc">Categories</span></a></li>
+                 <li><a href="/all/"><span class="page-toc">Site map</span></a></li>
             </ul>
             <div class="sidebar-title">Links</div>
             <ul class="toc">

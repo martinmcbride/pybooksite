@@ -8,7 +8,7 @@
 }
 #sidebar {
   width: 20%;
-  padding: 10px 10px 10px 20px;
+  padding: 40px 10px 10px 20px;
 }
  
 /* (B) SMALL SCREEN - 1 COLUMN LAYOUT */
@@ -22,8 +22,6 @@
   margin: auto;
   background: white;
 }
-
-
 
 body {
 	font-family: 'Raleway', sans-serif;
@@ -60,6 +58,15 @@ ul.navbar-nav {
     list-style-type:none;
     margin: 0;
     padding: 10px;
+}
+
+.sidebar-title {
+	font-family: 'Raleway', sans-serif;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: darkslategrey;
+	line-height: 1;
+	padding-top: 2em;
 }
 
 li.list-unstyled {
@@ -202,15 +209,18 @@ td {
 
 .toc {
     list-style-type: none;
+    padding: 0;
 }
 
 .chapter-toc {
     font-weight: bold;
+    font-size: 1.2em;
 }
 
 .chapter-toc-current {
     font-weight: bold;
     color: black
+    font-size: 1.2em;
 }
 
 .page-toc {

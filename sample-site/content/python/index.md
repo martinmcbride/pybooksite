@@ -1,6 +1,6 @@
 ---
 author: A Writer
-title: Python book
+title: Python
 date: 2022-03-16
 type: book
 book: python

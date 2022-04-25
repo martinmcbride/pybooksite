@@ -6,6 +6,7 @@
 import shutil, os
 import pystache
 import create_site_structure
+import tag_pages
 import create_site_map
 
 def get_public_path_for_page(public_path, filepath):
@@ -52,6 +53,11 @@ def write_webpage(config, html_template, public_path, webpage, site_structure):
     dynamic_config = dict()
     toc = create_site_structure.get_toc_for_webpage(site_structure, webpage)
     dynamic_config["toc"] = toc
+    dynamic_config["toc-title"] = create_site_structure.get_book_title_for_webpage(site_structure, webpage)
+
+    tags = webpage.get("tags", [])
+    dynamic_config["tag-items"] = [{"title": tag, "link": tag_pages.create_tag_link(tag)} for tag in tags]
+
 
     html = pystache.render(html_template, {**webpage, **config, **dynamic_config})
 
