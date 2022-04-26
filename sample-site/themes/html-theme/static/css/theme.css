@@ -184,30 +184,30 @@ blockquote {
 }
 
 .notebox {
-    border-left-color: blue;
+    border-left-color: dodgerblue;
     border-left-style: solid;
     border-left-width: 6px;
     padding-left: 20px;
     margin-bottom: 1rem;
-    background-color: #e0e0ff;
+    background-color: #81c1ff;
 }
 
 .tipbox {
-    border-left-color: yellow;
+    border-left-color: gold;
     border-left-style: solid;
     border-left-width: 6px;
     padding-left: 20px;
     margin-bottom: 1rem;
-    background-color: #ffffe0;
+    background-color: #ffeb81;
 }
 
 .warnbox {
-    border-left-color: red;
+    border-left-color: crimson;
     border-left-style: solid;
     border-left-width: 6px;
     padding-left: 20px;
     margin-bottom: 1rem;
-    background-color: #ffe0e0;
+    background-color: #f58ba0;
 }
 
 table {
@@ -230,7 +230,8 @@ th {
 }
 
 td {
-    padding-left: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
     border: none;
     vertical-align: top;
     text-align: left;
