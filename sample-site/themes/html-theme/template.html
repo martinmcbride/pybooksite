@@ -19,16 +19,27 @@
         <div id="article">
             <h1>{{title}}</h1>
             {{#author}}
-            <div class="article-details">{{.}}</div>
+                <div class="article-details">{{.}}</div>
             {{/author}}
             {{#date}}
-            <div class="article-details">{{.}}</div>
+               <div class="article-details">{{.}}</div>
             {{/date}}
-            <ul class="navbar-nav">
-            {{#tag-items}}
-            <li class="nav-item"><a class="nav-item" href="{{link}}">{{title}}</a></li>
-            {{/tag-items}}
-            </ul>
+            {{#tags-present}}
+                <ul class="tag-list">
+                    <li class="tag-item">Tags:</li>
+                    {{#tag-items}}
+                    <li class="tag-item"><a class="tag-item" href="{{link}}">{{title}}</a></li>
+                    {{/tag-items}}
+                </ul>
+            {{/tags-present}}
+            {{#categories-present}}
+                <ul class="category-list">
+                    <li class="category-item">Categories:</li>
+                    {{#category-items}}
+                    <li class="category-item"><a class="category-item" href="{{link}}">{{title}}</a></li>
+                    {{/category-items}}
+                </ul>
+            {{/categories-present}}
             {{{content}}}
         </div>
         <div id="sidebar">

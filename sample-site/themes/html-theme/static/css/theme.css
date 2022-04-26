@@ -60,6 +60,30 @@ ul.navbar-nav {
     padding: 10px;
 }
 
+li.tag-item {
+    display: inline;
+    margin-right: 10px;
+}
+
+ul.tag-list {
+    display: flex;
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+}
+
+li.category-item {
+    display: inline;
+    margin-right: 10px;
+}
+
+ul.category-list {
+    display: flex;
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+}
+
 .sidebar-title {
 	font-family: 'Raleway', sans-serif;
 	font-size: 1.5em;
@@ -151,12 +175,12 @@ img {
 }
 
 blockquote {
-    border-left-color: blue;
+    border-left-color: darkslategrey;
     border-left-style: solid;
     border-left-width: 6px;
     padding-left: 20px;
     margin-bottom: 1rem;
-    background-color: #e0e0ff;
+    background-color: #b0d0d0;
 }
 
 .notebox {
@@ -189,11 +213,16 @@ blockquote {
 table {
     margin-bottom: 2em;
     margin-top: 1em;
+    border: none;
 }
 
 th {
-    background-color: #e0e0ff;
-    padding-left: 2em;
+    background-color: #b0d0d0;
+    border: none;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-left: 0;
+    margin-right: 0;
     vertical-align: top;
     text-align: left;
     display: table-cell;
@@ -202,6 +231,7 @@ th {
 
 td {
     padding-left: 2em;
+    border: none;
     vertical-align: top;
     text-align: left;
     display: table-cell;
