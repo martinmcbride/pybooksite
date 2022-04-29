@@ -109,7 +109,10 @@ def create_webpage_dictionary(yaml_dict, html, path, name):
     # path and the name. The exception is for files that are named index - they are stored in the origianl folder.
     name = os.path.splitext(name)[0]
     if name!='index':
-        path = "/".join((path, name))
+        if path:
+            path = "/".join((path, name))
+        else:
+            path = name  # Top level items such as about.md have no path, so create about/index.html
     yaml_dict["path"] = path
 
 
