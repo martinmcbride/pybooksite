@@ -25,7 +25,7 @@ def load_config():
         print(e)
         raise
 
-    required_keys = ["theme", "site-name", "site-url"]
+    required_keys = ["theme", "site-name", "site-url", "public"]
     error_found = False
 
     for key in required_keys:
