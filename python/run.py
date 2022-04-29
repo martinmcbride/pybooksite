@@ -20,4 +20,4 @@ tagpages = tag_pages.create_all_tags(webpages)
 categorypages = category_pages.create_all_categories(webpages)
 indexpages = create_index_pages.create_index_pages(webpages)
 create_site.generate_site(config, html_template, "public", [webpages, tagpages, categorypages, indexpages],
-                          site_structure, "http://www.example.com")
+                          site_structure, config["site-url"])
