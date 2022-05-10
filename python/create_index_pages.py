@@ -12,7 +12,7 @@ def get_month_year(date):
 def create_recent_pages_page(webpages):
     entries = []
     for webpage in webpages:
-        entries.append((webpage["title"], '/' + webpage["path"], str(webpage.get("date", ""))))
+        entries.append((webpage["title"], '/' + webpage["path"] + "/", str(webpage.get("date", ""))))
     entries.sort(key=lambda x: x[2], reverse=True)
     entries = entries[:50]
     title = 'Most recent ' + str(len(entries)) + ' articles'
@@ -39,7 +39,7 @@ def create_recent_pages_page(webpages):
 def create_all_pages_page(webpages):
     entries = []
     for webpage in webpages:
-        entries.append((webpage["title"], '/' + webpage["path"]))
+        entries.append((webpage["title"], '/' + webpage["path"] + "/"))
     entries.sort(key=lambda x: x[0])
 
     title = 'All articles (' + str(len(entries)) + ')'
