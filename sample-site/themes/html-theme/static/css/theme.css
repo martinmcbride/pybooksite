@@ -248,9 +248,13 @@ td {
     font-size: 1.2em;
 }
 
+.chapter-toc:after {
+    content: "...";
+}
+
 .chapter-toc-current {
     font-weight: bold;
-    color: black
+    color: black;
     font-size: 1.2em;
 }
 
@@ -258,5 +262,5 @@ td {
 }
 
 .page-toc-current {
-    color: black
+    color: black;
 }
