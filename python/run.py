@@ -10,9 +10,12 @@ import create_site_structure
 import tag_pages
 import category_pages
 import create_index_pages
+import fragments
 
 config = config.load_config()
-webpages = webpages.load_webpages(config)
+fragments_dict = fragments.get_fragments(config)
+fragments.replace_fragments(fragments_dict, config)
+webpages = webpages.load_webpages(config, fragments_dict)
 
 html_template = create_site.read_html_template(config)
 site_structure = create_site_structure.create_site_structure(webpages)

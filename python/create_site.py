@@ -64,8 +64,7 @@ def write_webpage(config, html_template, public_path, webpage, site_structure):
     dynamic_config["categories-present"] = bool(categories)
     dynamic_config["category-items"] = [{"title": category, "link": "/" + category_pages.create_category_link(category)} for category in categories]
 
-
-    html = pystache.render(html_template, {**webpage, **config, **dynamic_config})
+    html = pystache.render(html_template, {**config, **webpage, **dynamic_config})
 
     directory, html_path = get_public_path_for_page(public_path, webpage["path"])
     try:

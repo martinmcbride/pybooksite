@@ -6,6 +6,7 @@
 import os
 import yaml
 import markdown
+import fragments
 
 def read_webpage_file(base, path, name):
     """
@@ -86,7 +87,7 @@ def convert_markdown_to_html(markdown_data, path, name):
     return html
 
 
-def create_webpage_dictionary(yaml_dict, html, path, name):
+def create_webpage_dictionary(yaml_dict, html, path, name, fragments_dict):
     """
     Create a page dictionary. This is basically the yaml_dict with:
 
@@ -123,9 +124,12 @@ def create_webpage_dictionary(yaml_dict, html, path, name):
     yaml_dict["tags"] = yaml_dict.get("tags", [])
     yaml_dict["categories"] = yaml_dict.get("categories", [])
 
+    # Update fragments with dynamic content
+    fragments.replace_fragments(fragments_dict, yaml_dict)
+
     return yaml_dict
 
-def load_webpage(config, base, path, name):
+def load_webpage(config, base, path, name, fragments_dict):
     """
     Load a page md file
     :param config: main site configuration config.yaml
@@ -143,10 +147,10 @@ def load_webpage(config, base, path, name):
 
     html = convert_markdown_to_html(markdown_data, path, name)
 
-    webpage_dict = create_webpage_dictionary(yaml_dict, html, path, name)
+    webpage_dict = create_webpage_dictionary(yaml_dict, html, path, name, fragments_dict)
     return webpage_dict
 
-def load_webpages(config):
+def load_webpages(config, fragments_dict):
     """
     Load all md files under the content folder.
     :param config: main site configuration config.yaml
@@ -158,7 +162,7 @@ def load_webpages(config):
         for filename in files:
             path = subdir[len(base)+1:]
             if filename.endswith(".md"):
-                page = load_webpage(config, base, path, filename)
+                page = load_webpage(config, base, path, filename, fragments_dict)
                 if page:
                     pages.append(page)
     return pages
