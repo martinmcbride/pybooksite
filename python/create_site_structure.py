@@ -12,14 +12,16 @@ def get_book_title_for_webpage(site_structure, webpage):
     Find the title of the book associated with a page.
     :param site_structure:
     :param webpage:
-    :return:
+    :return: shorttitle, style, path or None if not a book
     """
     book = webpage.get("book", None)
     if not book:
         return None
     book_item = site_structure[book].item
-    title = book_item.get("title", None)
-    return title if title else None
+    shorttitle = book_item.get("shorttitle", None)
+    path = book_item.get("path", None)
+    style = "toc-title-current" if webpage is book_item else "toc-title"
+    return shorttitle, style, path if shorttitle and path else None
 
 
 def add_books_to_site_structure(webpages, site_structure):

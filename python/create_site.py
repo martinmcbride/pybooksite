@@ -54,7 +54,10 @@ def write_webpage(config, html_template, public_path, webpage, site_structure):
     dynamic_config = dict()
     toc = create_site_structure.get_toc_for_webpage(site_structure, webpage)
     dynamic_config["toc"] = toc
-    dynamic_config["toc-title"] = create_site_structure.get_book_title_for_webpage(site_structure, webpage)
+    toc_title = create_site_structure.get_book_title_for_webpage(site_structure, webpage)
+    if toc_title:
+        book_shorttitle, book_style, book_link = toc_title
+        dynamic_config["toc-title"] = {"title": book_shorttitle, "style": book_style, "link": "/" + book_link}
 
     tags = webpage.get("tags", [])
     dynamic_config["tags-present"] = bool(tags)
