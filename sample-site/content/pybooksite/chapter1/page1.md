@@ -1,6 +1,7 @@
 ---
 author: B Writer
 title: Introduction to pybooksite Page 1
+shorttitle: Page 1
 date: 2022-03-16
 type: page
 book: pybooksite

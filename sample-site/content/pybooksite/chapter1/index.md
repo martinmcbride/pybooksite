@@ -1,6 +1,7 @@
 ---
 author: B Writer
 title: Introduction to pybooksite
+shorttitle: Introduction
 date: 2022-03-16
 type: chapter
 book: pybooksite
