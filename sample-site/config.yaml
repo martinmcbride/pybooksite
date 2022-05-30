@@ -8,6 +8,8 @@ menu:
   About: /about/
   Books: /books/
 googleanalytics: XXXXXXX-GA
+googleadsense: ca-pub-XXXX
+googleadsenseslot: XXXX
 mathjax: true
 social:
   Twitter: twitter.com

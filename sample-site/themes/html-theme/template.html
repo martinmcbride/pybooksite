@@ -3,6 +3,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{site-name}} - {{title}}</title>
     <link href="/css/theme.css" rel="stylesheet">
+    {{#googleadsense}}
+    <script type="text/javascript">
+        google_ad_client = "{{googleadsense}}";
+        google_ad_slot = "{{googleadsenseslot}}";
+        google_ad_width = 728;
+        google_ad_height = 90;
+    </script>
+    {{/googleadsense}}
 </head>
 
 <body>
@@ -17,6 +25,10 @@
     </div>
     <div id="content">
         <div id="article">
+            {{#googleadsense}}
+            <script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+            {{/googleadsense}}
             <h1>{{title}}</h1>
             {{#author}}
                 <div class="article-details">{{.}}</div>
