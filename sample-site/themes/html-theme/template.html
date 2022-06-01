@@ -2,6 +2,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{site-name}} - {{title}}</title>
+    <link href="/css/hilite.css" rel="stylesheet">
     <link href="/css/theme.css" rel="stylesheet">
     {{#googleadsense}}
     <script type="text/javascript">
@@ -53,6 +54,14 @@
                 </ul>
             {{/categories-present}}
             {{{content}}}
+            {{#see-also-present}}
+                <h2>See also</h2>
+                <ul>
+                {{#see-also}}
+                    <li><a href="{{link}}">{{title}}</a></li>
+                {{/see-also}}
+                </ul>
+            {{/see-also-present}}
             {{{__advert}}}
         </div>
         <div id="sidebar">

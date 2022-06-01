@@ -102,3 +102,25 @@ def get_toc_for_webpage(site_structure, webpage):
 
     return toc
 
+def get_related_pages_for_webpage(site_structure, webpage):
+    related_pages = []
+    book = webpage.get("book", None)
+    current_chapter = webpage.get("chapter", None)
+    if not book:
+        return related_pages
+
+    book_content = site_structure[book]
+
+    if webpage.get("type", None) == "book":
+        for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
+            related_pages.append(dict(title=chapter_content.item.get("title", ""),
+                                      link="/" + chapter_content.item.get("path", "") + "/"))
+    else:
+        for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
+            if chapter == current_chapter:
+                for page, page_content in sorted(chapter_content.children.items(), key=lambda x: x[1].weight):
+                    if webpage is not page_content.item:
+                        related_pages.append(dict(title=page_content.item.get("title", ""),
+                                      link="/" + page_content.item.get("path", "") + "/"))
+    return related_pages
+

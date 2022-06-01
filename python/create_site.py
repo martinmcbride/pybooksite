@@ -67,6 +67,10 @@ def write_webpage(config, html_template, public_path, webpage, site_structure):
     dynamic_config["categories-present"] = bool(categories)
     dynamic_config["category-items"] = [{"title": category, "link": "/" + category_pages.create_category_link(category)} for category in categories]
 
+    related_pages = create_site_structure.get_related_pages_for_webpage(site_structure, webpage)
+    dynamic_config["see-also-present"] = bool(related_pages)
+    dynamic_config["see-also"] = related_pages
+
     html = pystache.render(html_template, {**config, **webpage, **dynamic_config})
 
     directory, html_path = get_public_path_for_page(public_path, webpage["path"])
