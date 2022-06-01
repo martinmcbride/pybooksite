@@ -40,7 +40,7 @@ def read_html_template(config):
 
     return template
 
-def write_webpage(config, html_template, public_path, webpage, site_structure):
+def write_webpage(config, html_template, public_path, webpage, site_structure, tagcloud):
     """
     Write the page HTML to the correct place in the output folder, creating any necessary subfolder.
     :param config:
@@ -69,6 +69,7 @@ def write_webpage(config, html_template, public_path, webpage, site_structure):
     tags = webpage.get("tags", [])
     dynamic_config["tags-present"] = bool(tags)
     dynamic_config["tag-items"] = [{"title": tag, "link": "/" + tag_pages.create_tag_link(tag)} for tag in tags]
+    dynamic_config["tagcloud"] = tagcloud
 
     categories = webpage.get("categories", [])
     dynamic_config["categories-present"] = bool(categories)
@@ -146,7 +147,7 @@ def copy_static_files(config, public_path):
     copytree(theme_static_path, public_path)
 
 
-def write_site_webpages(config, html_template, public_path, webpages_list, site_structure):
+def write_site_webpages(config, html_template, public_path, webpages_list, site_structure, tagcloud):
     """
     Write out all pages
     :param config:
@@ -164,10 +165,10 @@ def write_site_webpages(config, html_template, public_path, webpages_list, site_
 
     for webpages in webpages_list:
         for webpage in webpages:
-            write_webpage(config, html_template, public_path, webpage, site_structure)
+            write_webpage(config, html_template, public_path, webpage, site_structure, tagcloud)
 
 
-def generate_site(config, html_template, public_path, webpages_list, site_structure, site_url):
+def generate_site(config, html_template, public_path, webpages_list, site_structure, site_url, tagcloud):
     """
     Create all pages and copy all static files to public area
     :param config:
@@ -176,6 +177,6 @@ def generate_site(config, html_template, public_path, webpages_list, site_struct
     :param webpages_list:
     :return:
     """
-    write_site_webpages(config, html_template, public_path, webpages_list, site_structure)
+    write_site_webpages(config, html_template, public_path, webpages_list, site_structure, tagcloud)
     copy_static_files(config, public_path)
     create_site_map.create_site_map(webpages_list[0], public_path, site_url)

@@ -71,3 +71,30 @@ def create_all_tags(webpages):
     tagpages.append(alltags)
 
     return tagpages
+
+def create_tag_cloud(pages):
+
+    sizes = ['85', '85', '85', '95', '105', '115', '125', '135', '145', '155']
+
+    entry_set = set()
+    entry_count = dict()
+    for page in pages:
+        for tag in page.get("tags", []):
+            entry_set.add((tag, create_tag_link(tag)))
+            if tag in entry_count:
+                entry_count[tag] += 1
+            else:
+                entry_count[tag] = 1
+
+    entries = list(entry_set)
+    entries.sort(key=lambda x: x[0])
+
+    tags = []
+    for tag, link in entries:
+        size = entry_count[tag]
+        if size > 1:
+            pc = sizes[min(size,9)]
+            tags.append('<a href="' + link + '"><span style="font-size:' + pc + '%;">' + tag + '</span></a>')
+
+    tagcloud = ' '.join(tags)
+    return tagcloud
