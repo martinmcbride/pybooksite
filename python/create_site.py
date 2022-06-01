@@ -59,6 +59,13 @@ def write_webpage(config, html_template, public_path, webpage, site_structure):
         book_shorttitle, book_style, book_link = toc_title
         dynamic_config["toc-title"] = {"title": book_shorttitle, "style": book_style, "link": "/" + book_link}
 
+    current_index, book_pages = create_site_structure.get_book_pages_for_webpage(site_structure, webpage)
+    if current_index >= 0:
+        if current_index > 0:
+            dynamic_config["prev"] = book_pages[current_index - 1]
+        if current_index < len(book_pages) - 1:
+            dynamic_config["next"] = book_pages[current_index + 1]
+
     tags = webpage.get("tags", [])
     dynamic_config["tags-present"] = bool(tags)
     dynamic_config["tag-items"] = [{"title": tag, "link": "/" + tag_pages.create_tag_link(tag)} for tag in tags]

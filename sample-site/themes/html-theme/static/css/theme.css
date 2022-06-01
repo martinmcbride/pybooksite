@@ -279,3 +279,7 @@ td {
 .page-toc-current {
     color: black;
 }
+
+.float-right {
+    float: right;
+}

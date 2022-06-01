@@ -99,8 +99,29 @@ def get_toc_for_webpage(site_structure, webpage):
             if current_chapter and page_content.item.get("chapter", None) == current_chapter:
                 style = "page-toc-current" if webpage is page_content.item else "page-toc"
                 toc.append(dict(style=style, title=page_content.item.get("shorttitle", ""), link="/" + page_content.item.get("path", "") + "/"))
-
     return toc
+
+def get_book_pages_for_webpage(site_structure, webpage):
+    pages = []
+    current_index = -1
+    book = webpage.get("book", None)
+    if not book:
+        return current_index, pages
+
+    book_content = site_structure[book]
+    page_index = 0
+    for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
+        if webpage is chapter_content.item:
+            current_index = page_index
+        pages.append("/" + chapter_content.item.get("path", "") + "/")
+        page_index += 1
+        for page, page_content in sorted(chapter_content.children.items(), key=lambda x: x[1].weight):
+            if webpage is page_content.item:
+                current_index = page_index
+            pages.append("/" + page_content.item.get("path", "") + "/")
+            page_index += 1
+
+    return current_index, pages
 
 def get_related_pages_for_webpage(site_structure, webpage):
     related_pages = []
