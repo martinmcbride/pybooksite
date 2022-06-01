@@ -74,7 +74,17 @@ def create_all_tags(webpages):
 
 def create_tag_cloud(pages):
 
-    sizes = ['85', '85', '85', '95', '105', '115', '125', '135', '145', '155']
+    sizes = ['tagpage0',
+             'tagpage1',
+             'tagpage2',
+             'tagpage3',
+             'tagpage4',
+             'tagpage5',
+             'tagpage6',
+             'tagpage7',
+             'tagpage8',
+             'tagpage9',
+             ]
 
     entry_set = set()
     entry_count = dict()
