@@ -74,16 +74,16 @@ def create_all_tags(webpages):
 
 def create_tag_cloud(pages):
 
-    sizes = ['tagpage0',
-             'tagpage1',
-             'tagpage2',
-             'tagpage3',
-             'tagpage4',
-             'tagpage5',
-             'tagpage6',
-             'tagpage7',
-             'tagpage8',
-             'tagpage9',
+    sizes = ['tagcloud0',
+             'tagcloud1',
+             'tagcloud2',
+             'tagcloud3',
+             'tagcloud4',
+             'tagcloud5',
+             'tagcloud6',
+             'tagcloud7',
+             'tagcloud8',
+             'tagcloud9',
              ]
 
     entry_set = set()
@@ -103,8 +103,8 @@ def create_tag_cloud(pages):
     for tag, link in entries:
         size = entry_count[tag]
         if size > 1:
-            pc = sizes[min(size,9)]
-            tags.append('<a href="' + link + '"><span style="font-size:' + pc + '%;">' + tag + '</span></a>')
+            tag_style = sizes[min(size,9)]
+            tags.append('<a href="' + link + '"><span class="' + tag_style + '">' + tag + '</span></a>')
 
     tagcloud = ' '.join(tags)
     return tagcloud
