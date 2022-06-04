@@ -104,7 +104,7 @@ def create_tag_cloud(pages):
         size = entry_count[tag]
         if size > 1:
             tag_style = sizes[min(size,9)]
-            tags.append('<a href="' + link + '"><span class="' + tag_style + '">' + tag + '</span></a>')
+            tags.append('<a href="/' + link + '"><span class="' + tag_style + '">' + tag + '</span></a>')
 
     tagcloud = ' '.join(tags)
     return tagcloud
