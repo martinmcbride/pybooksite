@@ -7,6 +7,7 @@ import os
 import yaml
 import markdown
 import fragments
+import page_utils
 
 def read_webpage_file(base, path, name):
     """
@@ -72,7 +73,7 @@ def parse_yaml(yaml_data, path, name):
 
 def convert_markdown_to_html(markdown_data, path, name):
     """
-    Convert a markdown string to
+    Convert a markdown string to html
     :param markdown_data: the markdown data from source file
     :param path: path of this page within the content area
     :param name: name of md file
@@ -97,7 +98,7 @@ def create_webpage_dictionary(yaml_dict, html, path, name, fragments_dict):
 
     :param yaml_dict: yaml data for page - this will be modified
     :param html: page markdown converted to html (the page content)
-    :param path: path of this page within the content area
+    :param path: file path of this md file within the content area
     :param name: name of md file
     :return: webpage dictionary - final destination of the file in the
     """
@@ -106,16 +107,7 @@ def create_webpage_dictionary(yaml_dict, html, path, name, fragments_dict):
     yaml_dict["content"] = html
 
     # Create a path.
-    # Each html file is renamed to index.html and stored in its own directory, so the full path is formed by joining the
-    # path and the name. The exception is for files that are named index - they are stored in the origianl folder.
-    name = os.path.splitext(name)[0]
-    if name!='index':
-        if path:
-            path = "/".join((path, name))
-        else:
-            path = name  # Top level items such as about.md have no path, so create about/index.html
-    yaml_dict["path"] = path
-
+    yaml_dict["path"] = page_utils.get_webpage_path(path, name)
 
     # If short title is not present, use the title instead
     yaml_dict["shorttitle"] = yaml_dict.get("shorttitle", yaml_dict.get("title", ""))
@@ -129,10 +121,9 @@ def create_webpage_dictionary(yaml_dict, html, path, name, fragments_dict):
 
     return yaml_dict
 
-def load_webpage(config, base, path, name, fragments_dict):
+def load_webpage(base, path, name, fragments_dict):
     """
     Load a page md file
-    :param config: main site configuration config.yaml
     :param base: base path to content area
     :param path: path of this page within the content area
     :param name: name of md file
@@ -162,7 +153,7 @@ def load_webpages(config, fragments_dict):
         for filename in files:
             path = subdir[len(base)+1:]
             if filename.endswith(".md"):
-                page = load_webpage(config, base, path, filename, fragments_dict)
+                page = load_webpage(base, path, filename, fragments_dict)
                 if page:
                     pages.append(page)
     return pages

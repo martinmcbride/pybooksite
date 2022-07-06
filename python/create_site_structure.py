@@ -19,7 +19,7 @@ def get_book_title_for_webpage(site_structure, webpage):
         return None
     book_item = site_structure[book].item
     shorttitle = book_item.get("shorttitle", None)
-    path = book_item.get("path", None)
+    path = book_item.get("path")
     style = "toc-title-current" if webpage is book_item else "toc-title"
     return shorttitle, style, path if shorttitle and path else None
 
@@ -94,11 +94,11 @@ def get_toc_for_webpage(site_structure, webpage):
     book_content = site_structure[book]
     for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
         style = "chapter-toc-current" if webpage is chapter_content.item else "chapter-toc"
-        toc.append(dict(style=style, title=chapter_content.item.get("shorttitle", ""), link="/" + chapter_content.item.get("path", "") + "/"))
+        toc.append(dict(style=style, title=chapter_content.item.get("shorttitle", ""), link=chapter_content.item.get("path", "")))
         for page, page_content in sorted(chapter_content.children.items(), key=lambda x: x[1].weight):
             if current_chapter and page_content.item.get("chapter", None) == current_chapter:
                 style = "page-toc-current" if webpage is page_content.item else "page-toc"
-                toc.append(dict(style=style, title=page_content.item.get("shorttitle", ""), link="/" + page_content.item.get("path", "") + "/"))
+                toc.append(dict(style=style, title=page_content.item.get("shorttitle", ""), link=page_content.item.get("path", "")))
     return toc
 
 def get_book_pages_for_webpage(site_structure, webpage):
@@ -113,12 +113,12 @@ def get_book_pages_for_webpage(site_structure, webpage):
     for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
         if webpage is chapter_content.item:
             current_index = page_index
-        pages.append("/" + chapter_content.item.get("path", "") + "/")
+        pages.append(chapter_content.item.get("path", ""))
         page_index += 1
         for page, page_content in sorted(chapter_content.children.items(), key=lambda x: x[1].weight):
             if webpage is page_content.item:
                 current_index = page_index
-            pages.append("/" + page_content.item.get("path", "") + "/")
+            pages.append(page_content.item.get("path", ""))
             page_index += 1
 
     return current_index, pages
@@ -135,13 +135,13 @@ def get_related_pages_for_webpage(site_structure, webpage):
     if webpage.get("type", None) == "book":
         for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
             related_pages.append(dict(title=chapter_content.item.get("title", ""),
-                                      link="/" + chapter_content.item.get("path", "") + "/"))
+                                      link=chapter_content.item.get("path", "")))
     else:
         for chapter, chapter_content in sorted(book_content.children.items(), key=lambda x: x[1].weight):
             if chapter == current_chapter:
                 for page, page_content in sorted(chapter_content.children.items(), key=lambda x: x[1].weight):
                     if webpage is not page_content.item:
                         related_pages.append(dict(title=page_content.item.get("title", ""),
-                                      link="/" + page_content.item.get("path", "") + "/"))
+                                      link=page_content.item.get("path", "")))
     return related_pages
 

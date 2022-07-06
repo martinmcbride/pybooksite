@@ -9,7 +9,7 @@ def create_category_linkname(category):
     return 'category-' + category.replace(' ', '-')
 
 def create_category_link(category):
-    return 'categories/' + create_category_linkname(category) + '/'
+    return '/categories/' + create_category_linkname(category) + '/'
 
 def create_category_page(category, webpages):
     title = 'Category: ' + category
@@ -18,7 +18,7 @@ def create_category_page(category, webpages):
     entries = []
     for webpage in webpages:
         if category in webpage.get("categories", []):
-            entries.append((webpage["title"], '/' + webpage["path"]))
+            entries.append((webpage["title"], webpage["path"]))
     entries.sort(key=lambda x: x[0])
 
     content = ''
@@ -56,7 +56,7 @@ def create_allcategory_page(webpages):
         content += '<p><h3>Other</h3>'
         content += ', '.join(['<a href="' + p + '">' + t + '</a>' for t, p in initial_entries])
 
-    categorypage = dict(title=title, content=content, tags=[], categories=[], path="categories/")
+    categorypage = dict(title=title, content=content, tags=[], categories=[], path="/categories/")
     return categorypage
 
 def create_all_categories(webpages):

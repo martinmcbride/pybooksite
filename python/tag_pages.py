@@ -7,7 +7,7 @@ def create_tag_linkname(tag):
     return 'tag-' + tag.replace(' ', '-')
 
 def create_tag_link(tag):
-    return 'tags/' + create_tag_linkname(tag) + '/'
+    return '/tags/' + create_tag_linkname(tag) + '/'
 
 def create_tag_page(tag, webpages):
     title = 'Tag: ' + tag
@@ -16,7 +16,7 @@ def create_tag_page(tag, webpages):
     entries = []
     for webpage in webpages:
         if tag in webpage.get("tags", []):
-            entries.append((webpage["title"], '/' + webpage["path"]))
+            entries.append((webpage["title"], webpage["path"]))
     entries.sort(key=lambda x: x[0])
 
     content = ''
@@ -54,7 +54,7 @@ def create_alltag_page(webpages):
         content += '<p><h3>Other</h3>'
         content += ', '.join(['<a href="' + p + '">' + t + '</a>' for t, p in initial_entries])
 
-    tagpage = dict(title=title, content=content, tags=[], categories=[], path="tags/")
+    tagpage = dict(title=title, content=content, tags=[], categories=[], path="/tags/")
     return tagpage
 
 def create_all_tags(webpages):
@@ -104,7 +104,7 @@ def create_tag_cloud(pages):
         size = entry_count[tag]
         if size > 1:
             tag_style = sizes[min(size,9)]
-            tags.append('<a href="/' + link + '"><span class="' + tag_style + '">' + tag + '</span></a>')
+            tags.append('<a href="' + link + '"><span class="' + tag_style + '">' + tag + '</span></a>')
 
     tagcloud = ' '.join(tags)
     return tagcloud

@@ -17,7 +17,8 @@ def get_public_path_for_page(public_path, filepath):
     :param filepath: html path for this page
     :return:
     """
-    directory = os.path.join(public_path, filepath)
+    print("^^^", public_path, filepath)
+    directory = public_path + filepath
     html_name = 'index.html'
     html_path = os.path.join(directory, html_name)
     return directory, html_path
@@ -57,7 +58,7 @@ def write_webpage(config, html_template, public_path, webpage, site_structure, t
     toc_title = create_site_structure.get_book_title_for_webpage(site_structure, webpage)
     if toc_title:
         book_shorttitle, book_style, book_link = toc_title
-        dynamic_config["toc-title"] = {"title": book_shorttitle, "style": book_style, "link": "/" + book_link}
+        dynamic_config["toc-title"] = {"title": book_shorttitle, "style": book_style, "link": book_link}
 
     current_index, book_pages = create_site_structure.get_book_pages_for_webpage(site_structure, webpage)
     if current_index >= 0:
@@ -68,12 +69,12 @@ def write_webpage(config, html_template, public_path, webpage, site_structure, t
 
     tags = webpage.get("tags", [])
     dynamic_config["tags-present"] = bool(tags)
-    dynamic_config["tag-items"] = [{"title": tag, "link": "/" + tag_pages.create_tag_link(tag)} for tag in tags]
+    dynamic_config["tag-items"] = [{"title": tag, "link": tag_pages.create_tag_link(tag)} for tag in tags]
     dynamic_config["tagcloud"] = tagcloud
 
     categories = webpage.get("categories", [])
     dynamic_config["categories-present"] = bool(categories)
-    dynamic_config["category-items"] = [{"title": category, "link": "/" + category_pages.create_category_link(category)} for category in categories]
+    dynamic_config["category-items"] = [{"title": category, "link": category_pages.create_category_link(category)} for category in categories]
 
     related_pages = create_site_structure.get_related_pages_for_webpage(site_structure, webpage)
     dynamic_config["see-also-present"] = bool(related_pages)
@@ -82,6 +83,7 @@ def write_webpage(config, html_template, public_path, webpage, site_structure, t
     html = pystache.render(html_template, {**config, **webpage, **dynamic_config})
 
     directory, html_path = get_public_path_for_page(public_path, webpage["path"])
+    print(")))", directory, html_path)
     try:
         os.makedirs(directory, exist_ok=True)
         with open(html_path, 'w') as outfile:
@@ -89,7 +91,7 @@ def write_webpage(config, html_template, public_path, webpage, site_structure, t
     except Exception as e:
         print("Error writing output file", html_path)
         print(e)
-        raise
+        #raise
 
 
 def copytree(src, dst):
