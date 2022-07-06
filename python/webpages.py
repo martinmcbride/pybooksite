@@ -2,7 +2,7 @@
 # Created: 2022-04-16
 # Copyright (c) 2022, Martin McBride
 # License: MIT
-
+import logging
 import os
 import yaml
 import markdown
@@ -41,8 +41,8 @@ def read_webpage_file(base, path, name):
             for s in infile:
                 markdown_data += s
     except Exception as e:
-        print("Error reading markdown file", path, name)
-        print(e)
+        logging.error("Error reading markdown file", path, name)
+        logging.error(e)
         raise
 
     return yaml_data, markdown_data
@@ -65,8 +65,8 @@ def parse_yaml(yaml_data, path, name):
     try:
         yaml_dict = yaml.load(yaml_data, yaml.SafeLoader)
     except Exception as e:
-        print("Error parsing yaml data in markdown file", path, name)
-        print(e)
+        logging.error("Error parsing yaml data in markdown file", path, name)
+        logging.error(e)
         raise
 
     return yaml_dict
@@ -82,8 +82,8 @@ def convert_markdown_to_html(markdown_data, path, name):
     try:
         html = markdown.markdown(markdown_data, extensions=['codehilite', 'fenced_code', 'tables', 'customblocks'])
     except Exception as e:
-        print("Error parsing markdown data in markdown file", path, name)
-        print(e)
+        logging.error("Error parsing markdown data in markdown file", path, name)
+        logging.error(e)
         raise
     return html
 

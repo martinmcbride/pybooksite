@@ -27,7 +27,6 @@ def get_webpage_path(filepath, filename):
             filepath = "/" + filepath + "/"
         else:
             filepath = "/"
-    print("--", filepath)
     return filepath
 
 

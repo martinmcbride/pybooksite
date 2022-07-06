@@ -2,7 +2,7 @@
 # Created: 2022-05-13
 # Copyright (c) 2022, Martin McBride
 # License: MIT
-
+import logging
 import os
 
 def get_fragments(config):
@@ -25,5 +25,5 @@ def replace_fragments(fragments_dict, dynamic_config):
         if key.startswith("__"):
             fragment_name = dynamic_config[key]
             if not fragment_name in fragments_dict:
-                print("Fragment {} not found in page {}".format(fragment_name, dynamic_config.get("title", "unknown")))
+                logging.warning("Fragment {} not found in page {}".format(fragment_name, dynamic_config.get("title", "unknown")))
             dynamic_config[key] = fragments_dict.get(fragment_name, None)

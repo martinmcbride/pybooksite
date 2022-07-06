@@ -2,7 +2,7 @@
 # Created: 2022-04-17
 # Copyright (c) 2022, Martin McBride
 # License: MIT
-
+import logging
 from collections import namedtuple
 
 PageItem = namedtuple("PageItem", ["item", "weight", "children"])
@@ -31,10 +31,10 @@ def add_books_to_site_structure(webpages, site_structure):
                 if webpage.get("book", None) not in site_structure:
                     site_structure[webpage["book"]] = PageItem(webpage, webpage.get("weight", 0), dict())
                 else:
-                    print("More than one book named", webpage.get("book", None))
+                    logging.error("More than one book named", webpage.get("book", None))
                     raise Exception()
             else:
-                print("Book webpage has no book entry", webpage.get("path", "unknown path"))
+                logging.error("Book webpage has no book entry", webpage.get("path", "unknown path"))
                 raise Exception()
 
 
@@ -44,15 +44,15 @@ def add_chapters_to_site_structure(webpages, site_structure):
             if webpage.get("book", None) and webpage.get("chapter", None):
                 if webpage.get("book", None) in site_structure:
                     if webpage.get("chapter", None) in site_structure[webpage["book"]].children:
-                        print("More than one chapter named", webpage.get("chapter", None))
+                        logging.error("More than one chapter named", webpage.get("chapter", None))
                         raise Exception()
                     else:
                         site_structure[webpage["book"]].children[webpage["chapter"]] = PageItem(webpage, webpage.get("weight", 0), dict())
                 else:
-                    print("Chapter references a book that isn't defined", webpage.get("book", None))
+                    logging.error("Chapter references a book that isn't defined", webpage.get("book", None))
                     raise Exception()
             else:
-                print("Chapter missing a book or chapter entry", webpage.get("path", "unknown path"))
+                logging.error("Chapter missing a book or chapter entry", webpage.get("path", "unknown path"))
                 raise Exception()
 
 
@@ -63,10 +63,10 @@ def add_pages_to_site_structure(webpages, site_structure):
                 if webpage.get("book", None) in site_structure and webpage.get("chapter", None) in site_structure[webpage["book"]].children:
                     site_structure[webpage["book"]].children[webpage["chapter"]].children[webpage["title"]] = PageItem(webpage, webpage.get("weight", 0), None)
                 else:
-                    print("Page references a book or chapter that isn't defined", webpage.get("book", None))
+                    logging.error("Page references a book or chapter that isn't defined", webpage.get("book", None))
                     raise Exception()
             else:
-                print("Page missing a book or chapter entry", webpage.get("path", "unknown path"))
+                logging.error("Page missing a book or chapter entry", webpage.get("path", "unknown path"))
                 raise Exception()
 
 def dump_site_structure(site_structure):

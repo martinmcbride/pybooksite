@@ -3,12 +3,17 @@
 # Copyright (c) 2022, Martin McBride
 # License: MIT
 
-import shutil, os
+import logging
+import os
+import shutil
+
 import pystache
-import create_site_structure
-import tag_pages
+
 import category_pages
 import create_site_map
+import create_site_structure
+import tag_pages
+
 
 def get_public_path_for_page(public_path, filepath):
     """
@@ -17,7 +22,6 @@ def get_public_path_for_page(public_path, filepath):
     :param filepath: html path for this page
     :return:
     """
-    print("^^^", public_path, filepath)
     directory = public_path + filepath
     html_name = 'index.html'
     html_path = os.path.join(directory, html_name)
@@ -35,8 +39,8 @@ def read_html_template(config):
         with open(template_path) as infile:
             template = ''.join(infile)
     except Exception as e:
-        print("Error reading template file", template_path)
-        print(e)
+        logging.error("Error reading template file", template_path)
+        logging.error(e)
         raise
 
     return template
@@ -83,14 +87,13 @@ def write_webpage(config, html_template, public_path, webpage, site_structure, t
     html = pystache.render(html_template, {**config, **webpage, **dynamic_config})
 
     directory, html_path = get_public_path_for_page(public_path, webpage["path"])
-    print(")))", directory, html_path)
     try:
         os.makedirs(directory, exist_ok=True)
         with open(html_path, 'w') as outfile:
             outfile.write(html)
     except Exception as e:
-        print("Error writing output file", html_path)
-        print(e)
+        logging.error("Error writing output file", html_path)
+        logging.error(e)
         #raise
 
 
@@ -162,8 +165,8 @@ def write_site_webpages(config, html_template, public_path, webpages_list, site_
     try:
         shutil.rmtree(public_path, ignore_errors=False, onerror=None)
     except Exception as e:
-        print("Failed to delete public area", public_path)
-        print(e)
+        logging.info("Failed to delete public area", public_path)
+        logging.info(e)
 
     for webpages in webpages_list:
         for webpage in webpages:
