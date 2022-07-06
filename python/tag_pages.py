@@ -10,6 +10,12 @@ def create_tag_link(tag):
     return '/tags/' + create_tag_linkname(tag) + '/'
 
 def create_tag_page(tag, webpages):
+    """
+    Create a page for a particular tag
+    :param tag: Tag name
+    :param webpages: Webpages list
+    :return: the page
+    """
     title = 'Tag: ' + tag
     path = create_tag_link(tag)
 
@@ -31,6 +37,11 @@ def create_tag_page(tag, webpages):
     return tagpage
 
 def create_alltag_page(webpages):
+    """
+    Create a page listing all tags
+    :param webpages:
+    :return: the page
+    """
 
     entry_set = set()
     for webpage in webpages:
@@ -58,6 +69,12 @@ def create_alltag_page(webpages):
     return tagpage
 
 def create_all_tags(webpages):
+    """
+    Create all the required tag pages. That includes a page for every individual tag and the all tags
+    page.
+    :param webpages:
+    :return: The list of pages
+    """
     tags = set()
     for webpage in webpages:
         for tag in webpage.get("tags", []):

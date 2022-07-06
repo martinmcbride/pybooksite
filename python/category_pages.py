@@ -3,8 +3,6 @@
 # Copyright (c) 2022, Martin McBride
 # License: MIT
 
-import os
-
 def create_category_linkname(category):
     return 'category-' + category.replace(' ', '-')
 
@@ -12,6 +10,12 @@ def create_category_link(category):
     return '/categories/' + create_category_linkname(category) + '/'
 
 def create_category_page(category, webpages):
+    """
+    Create a page for a particular category
+    :param category: Category name
+    :param webpages: Webpages list
+    :return: the page
+    """
     title = 'Category: ' + category
     path = create_category_link(category)
 
@@ -33,6 +37,11 @@ def create_category_page(category, webpages):
     return categorypage
 
 def create_allcategory_page(webpages):
+    """
+    Create a page listing all categories
+    :param webpages:
+    :return: the page
+    """
 
     entry_set = set()
     for webpage in webpages:
@@ -60,6 +69,12 @@ def create_allcategory_page(webpages):
     return categorypage
 
 def create_all_categories(webpages):
+    """
+    Create all the required category pages. That includes a page for every individual category and the all categories
+    page.
+    :param webpages:
+    :return: The list of pages
+    """
     categories = set()
     for webpage in webpages:
         for category in webpage.get("categories", []):
