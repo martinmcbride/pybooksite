@@ -20,7 +20,7 @@ def get_public_path_for_page(public_path, filepath):
     Return the folder and path for a page
     :param public_path: Location for generated files
     :param filepath: html path for this page
-    :return:
+    :return: full path of directory, full path of html file as a tuple
     """
     directory = public_path + filepath
     html_name = 'index.html'
@@ -31,7 +31,7 @@ def read_html_template(config):
     """
     Read in the html template from the theme
     :param config: configuration from config.yaml
-    :return:
+    :return: template as a strimg
     """
     try:
         theme = config["theme"]

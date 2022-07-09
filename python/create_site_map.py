@@ -7,6 +7,15 @@ import os.path
 import page_utils
 
 def create_site_map(webpages, public_path, site_url):
+    """
+    Create a sitemap and write it to teh top level of the public area.
+
+    A site map is an XML file listing every page on the site, including the URL, title, and date of last update.
+    :param webpages: List of pages
+    :param public_path: Path to public area
+    :param site_url: Main site URL
+    :return: None
+    """
     entries = []
     for webpage in webpages:
         entries.append((webpage["title"], page_utils.get_page_full_url(webpage, site_url), webpage.get("date", None)))

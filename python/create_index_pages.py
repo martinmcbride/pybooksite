@@ -6,10 +6,21 @@
 month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ]
 
 def get_month_year(date):
+    """
+    Convert a date string into a month name and year number.
+    :param date: date in format "2022-04-21"
+    :return: String is format "Apr 2022"
+    """
     month = int(date[5:7]) - 1
     return month_names[month] + ' ' + date[0:4]
 
 def create_recent_pages_page(webpages):
+    """
+    Create a recent pages page containing up to 50 of the most recent pages, ordered by the most recent,
+    split by month.
+    :param webpages: List of pages
+    :return: New page
+    """
     entries = []
     for webpage in webpages:
         entries.append((webpage["title"], webpage["path"], str(webpage.get("date", ""))))
@@ -37,6 +48,11 @@ def create_recent_pages_page(webpages):
     return recentpage
 
 def create_all_pages_page(webpages):
+    """
+    Create an "all pages" page containing every page, ordered alphabetically, split by first letter.
+    :param webpages: List of pages
+    :return: New page
+    """
     entries = []
     for webpage in webpages:
         entries.append((webpage["title"], webpage["path"]))
@@ -67,6 +83,11 @@ def create_all_pages_page(webpages):
     return indexpage
 
 def create_index_pages(webpages):
+    """
+    Create all index pages
+    :param webpages:
+    :return: list of all index pages
+    """
     return [create_all_pages_page(webpages),
             create_recent_pages_page(webpages),
             ]
