@@ -260,23 +260,19 @@ td {
 
 .chapter-toc {
     font-weight: bold;
-    font-size: 1.2em;
-}
-
-.chapter-toc:after {
-    content: "...";
 }
 
 .chapter-toc-current {
     font-weight: bold;
     color: black;
-    font-size: 1.2em;
 }
 
 .page-toc {
+    padding-left: 1em;
 }
 
 .page-toc-current {
+    padding-left: 1em;
     color: black;
 }
 
