@@ -2,6 +2,7 @@
 # Created: 2022-04-21
 # Copyright (c) 2022, Martin McBride
 # License: MIT
+from python.create_site_structure import is_blog_page
 
 month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ]
 
@@ -47,6 +48,39 @@ def create_recent_pages_page(webpages):
     recentpage = dict(title=title, content=content, tags=[], categories=[], path="/recent/")
     return recentpage
 
+def create_blog_pages_page(webpages):
+    """
+    Create a blog pages page containing all blog pages, ordered by the most recent,
+    split by month.
+    :param webpages: List of pages
+    :return: New page
+    """
+    entries = []
+    for webpage in webpages:
+        if is_blog_page(webpage):
+            entries.append((webpage["title"], webpage["path"], str(webpage.get("date", ""))))
+    entries.sort(key=lambda x: x[2], reverse=True)
+    title = 'All blog posts'
+
+    content = ''
+    month = '0000-00'
+    first = True
+    if entries:
+        for t, p, d in entries:
+            new = month[:7]!=d[:7]
+            if new:
+                month = d[:8]
+                if not first:
+                    content += '</ol>'
+                first = False
+                content += '<h3>' + get_month_year(month) + '</h3>'
+                content += '<ol class="list-unstyled">'
+            content += '<li><a href="' + p + '">' + t + '</a></li>'
+    content += '</ol>'
+
+    blogpage = dict(title=title, content=content, tags=[], categories=[], path="/blog/")
+    return blogpage
+
 def create_all_pages_page(webpages):
     """
     Create an "all pages" page containing every page, ordered alphabetically, split by first letter.
@@ -90,4 +124,5 @@ def create_index_pages(webpages):
     """
     return [create_all_pages_page(webpages),
             create_recent_pages_page(webpages),
+            create_blog_pages_page(webpages),
             ]
