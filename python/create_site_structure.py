@@ -50,7 +50,7 @@ def get_toc_title_for_webpage(site_structure, webpage):
         return shorttitle, style, path if shorttitle and path else None
 
     if is_blog_page(webpage):
-        return "Posts", "toc-title", "/all-blog-posts/"
+        return "Posts", "toc-title", "/blog/"
 
     return None
 
