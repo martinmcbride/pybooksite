@@ -24,14 +24,38 @@
 }
 
 body {
-	font-family: 'Raleway', sans-serif;
-	font-size: 1em;
+	font-family: 'Georgia', serif;
+	font-size: 1.2em;
     line-height: 1.6;
     color: #333;
 }
 
 #header {
     background-color: darkslategrey
+}
+
+.hero-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (header.png). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/header.png");
+
+  /* Set a specific height */
+  height: 50%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
 a.nav-item:link {
@@ -54,6 +78,7 @@ li.nav-item {
     }
 
 ul.navbar-nav {
+	font-family: 'Helvetica', sans-serif;
     display: flex;
     list-style-type:none;
     margin: 0;
@@ -84,8 +109,12 @@ ul.category-list {
     padding: 0;
 }
 
+.after-page-details {
+    margin-bottom: 3em;
+}
+
 .sidebar-title {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-size: 1.5em;
 	font-weight: bold;
 	color: darkslategrey;
@@ -115,7 +144,7 @@ ul {
 }
 
 #title {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-size: 5em;
 	color: white;
 	line-height: 1;
@@ -123,27 +152,32 @@ ul {
 }
 
 h1 {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-size: 3em;
 	color: darkslategrey;
+	margin-bottom: 1em;
+	line-height: 1.2;
 }
 
 h2 {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-size: 2.5em;
 	color: darkslategrey;
+	margin-bottom: 0;
 }
 
 h3 {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-size: 2em;
 	color: darkslategrey;
+	margin-bottom: 0;
 }
 
 h4 {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-size: 1.5em;
 	color: darkslategrey;
+	margin-bottom: 0;
 }
 
 a:link {
@@ -239,6 +273,7 @@ td {
 }
 
 .toc-title {
+	font-family: 'Helvetica', sans-serif;
 	font-size: 1.5em;
 	font-weight: bold;
 	line-height: 1;
@@ -246,6 +281,7 @@ td {
 }
 
 .toc-title-current {
+	font-family: 'Helvetica', sans-serif;
 	font-size: 1.5em;
 	font-weight: bold;
     color: black;
@@ -259,10 +295,12 @@ td {
 }
 
 .chapter-toc {
+	font-family: 'Helvetica', sans-serif;
     font-weight: bold;
 }
 
 .chapter-toc-current {
+	font-family: 'Helvetica', sans-serif;
     font-weight: bold;
     color: black;
 }

@@ -14,6 +14,8 @@ import create_site_map
 import create_site_structure
 import tag_pages
 
+def create_canonical_link(config, path):
+    return config["site-url"] + "/" + path
 
 def get_public_path_for_page(public_path, filepath):
     """
@@ -83,6 +85,8 @@ def write_webpage(config, html_template, public_path, webpage, site_structure, t
     related_pages = create_site_structure.get_related_pages_for_webpage(site_structure, webpage)
     dynamic_config["see-also-present"] = bool(related_pages)
     dynamic_config["see-also"] = related_pages
+
+    dynamic_config["canonical"] = create_canonical_link(config, webpage["path"])
 
     html = pystache.render(html_template, {**config, **webpage, **dynamic_config})
 

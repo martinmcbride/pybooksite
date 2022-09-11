@@ -18,6 +18,7 @@ def create_tag_page(tag, webpages):
     """
     title = 'Tag: ' + tag
     path = create_tag_link(tag)
+    meta = "All pages tagged with " + tag
 
     entries = []
     for webpage in webpages:
@@ -32,7 +33,7 @@ def create_tag_page(tag, webpages):
             content += '<li><a href="' + p + '">' + t + '</a></li>'
         content += '</ol>'
 
-    tagpage = dict(title=title, content=content, tags=[], categories=[], path=path)
+    tagpage = dict(title=title, content=content, tags=[], categories=[], path=path, meta=meta)
 
     return tagpage
 
@@ -42,11 +43,12 @@ def create_alltag_page(webpages):
     :param webpages:
     :return: the page
     """
+    meta = "List of tags"
 
     entry_set = set()
     for webpage in webpages:
         for tag in webpage.get("tags", []):
-            entry_set.add((tag, "/" + create_tag_link(tag)))
+            entry_set.add((tag, create_tag_link(tag)))
 
     entries = list(entry_set)
     entries.sort(key=lambda x: x[0])
@@ -65,7 +67,7 @@ def create_alltag_page(webpages):
         content += '<p><h3>Other</h3>'
         content += ', '.join(['<a href="' + p + '">' + t + '</a>' for t, p in initial_entries])
 
-    tagpage = dict(title=title, content=content, tags=[], categories=[], path="/tags/")
+    tagpage = dict(title=title, content=content, tags=[], categories=[], path="/tags/", meta=meta)
     return tagpage
 
 def create_all_tags(webpages):

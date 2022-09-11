@@ -22,6 +22,7 @@ def create_recent_pages_page(webpages):
     :param webpages: List of pages
     :return: New page
     """
+    meta = "List of recent pages"
     entries = []
     for webpage in webpages:
         entries.append((webpage["title"], webpage["path"], str(webpage.get("date", ""))))
@@ -45,7 +46,7 @@ def create_recent_pages_page(webpages):
             content += '<li><a href="' + p + '">' + t + '</a></li>'
     content += '</ol>'
 
-    recentpage = dict(title=title, content=content, tags=[], categories=[], path="/recent/")
+    recentpage = dict(title=title, content=content, tags=[], categories=[], path="/recent/", meta=meta)
     return recentpage
 
 def create_blog_pages_page(webpages):
@@ -87,6 +88,7 @@ def create_all_pages_page(webpages):
     :param webpages: List of pages
     :return: New page
     """
+    meta = "list of all pages"
     entries = []
     for webpage in webpages:
         entries.append((webpage["title"], webpage["path"]))
@@ -113,7 +115,7 @@ def create_all_pages_page(webpages):
             content += '<li><a href="' + p + '">' + t + '</a></li>'
         content += '</ol>'
 
-    indexpage = dict(title=title, content=content, tags=[], categories=[], path="/all/")
+    indexpage = dict(title=title, content=content, tags=[], categories=[], path="/all/", meta=meta)
     return indexpage
 
 def create_index_pages(webpages):

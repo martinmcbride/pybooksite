@@ -18,6 +18,7 @@ def create_category_page(category, webpages):
     """
     title = 'Category: ' + category
     path = create_category_link(category)
+    meta = "All pages in category " + category
 
     entries = []
     for webpage in webpages:
@@ -32,7 +33,7 @@ def create_category_page(category, webpages):
             content += '<li><a href="' + p + '">' + t + '</a></li>'
         content += '</ol>'
 
-    categorypage = dict(title=title, content=content, tags=[], categories=[], path=path)
+    categorypage = dict(title=title, content=content, tags=[], categories=[], path=path, meta=meta)
 
     return categorypage
 
@@ -42,11 +43,11 @@ def create_allcategory_page(webpages):
     :param webpages:
     :return: the page
     """
-
+    meta = "List of categories"
     entry_set = set()
     for webpage in webpages:
         for category in webpage.get("categories", []):
-            entry_set.add((category, "/" + create_category_link(category)))
+            entry_set.add((category, create_category_link(category)))
 
     entries = list(entry_set)
     entries.sort(key=lambda x: x[0])
@@ -65,7 +66,7 @@ def create_allcategory_page(webpages):
         content += '<p><h3>Other</h3>'
         content += ', '.join(['<a href="' + p + '">' + t + '</a>' for t, p in initial_entries])
 
-    categorypage = dict(title=title, content=content, tags=[], categories=[], path="/categories/")
+    categorypage = dict(title=title, content=content, tags=[], categories=[], path="/categories/", meta=meta)
     return categorypage
 
 def create_all_categories(webpages):

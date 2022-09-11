@@ -88,7 +88,7 @@ def convert_markdown_to_html(markdown_data, path, name):
     return html
 
 
-def create_webpage_dictionary(yaml_dict, html, path, name, fragments_dict):
+def create_webpage_dictionary(config, yaml_dict, html, path, name, fragments_dict):
     """
     Create a page dictionary. This is basically the yaml_dict with:
 
@@ -111,6 +111,8 @@ def create_webpage_dictionary(yaml_dict, html, path, name, fragments_dict):
 
     # If short title is not present, use the title instead
     yaml_dict["shorttitle"] = yaml_dict.get("shorttitle", yaml_dict.get("title", ""))
+    # If seo title is not present, use the sitename + title instead
+    yaml_dict["seotitle"] = yaml_dict.get("seotitle", " - ".join([config.get("site-name", ""), yaml_dict.get("title", "")]))
 
     # tags and categories should be empty tuple if not present
     yaml_dict["tags"] = yaml_dict.get("tags", [])
@@ -121,7 +123,7 @@ def create_webpage_dictionary(yaml_dict, html, path, name, fragments_dict):
 
     return yaml_dict
 
-def load_webpage(base, path, name, fragments_dict):
+def load_webpage(config, base, path, name, fragments_dict):
     """
     Load a page md file
     :param base: base path to content area
@@ -138,7 +140,7 @@ def load_webpage(base, path, name, fragments_dict):
 
     html = convert_markdown_to_html(markdown_data, path, name)
 
-    webpage_dict = create_webpage_dictionary(yaml_dict, html, path, name, fragments_dict)
+    webpage_dict = create_webpage_dictionary(config, yaml_dict, html, path, name, fragments_dict)
     return webpage_dict
 
 def load_webpages(config, fragments_dict):
@@ -153,7 +155,7 @@ def load_webpages(config, fragments_dict):
         for filename in files:
             path = subdir[len(base)+1:]
             if filename.endswith(".md"):
-                page = load_webpage(base, path, filename, fragments_dict)
+                page = load_webpage(config, base, path, filename, fragments_dict)
                 if page:
                     pages.append(page)
     return pages

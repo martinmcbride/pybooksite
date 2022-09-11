@@ -1,7 +1,14 @@
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{site-name}} - {{title}}</title>
+    {{#meta}}
+    <meta name="description" content="{{meta}}">
+    {{/meta}}
+    <title>{{seotitle}}</title>
+    {{#canonical}}
+    <link rel="canonical" href="{{canonical}}">
+    {{/canonical}}
     <link href="/css/hilite.css" rel="stylesheet">
     <link href="/css/theme.css" rel="stylesheet">
     {{#googleadsense}}
@@ -16,8 +23,12 @@
 
 <body>
 <div id="page">
-    <div id="header">
-        <a href="/"><span id="title">{{site-name}}</span></a>
+<div class="hero-image">
+  <div class="hero-text">
+    <a href="/"><span id="title">{{site-name}}</span></a>
+  </div>
+</div>
+    <div id="header" class="header-image">
         <ul class="navbar-nav">
             {{#menu}}
             <li class="nav-item"><a class="nav-item" href="{{link}}">{{title}}</a></li>
@@ -53,6 +64,7 @@
                     {{/category-items}}
                 </ul>
             {{/categories-present}}
+            <div class="after-page-details"></div>
             {{{content}}}
             {{#see-also-present}}
                 <h2>See also</h2>
@@ -64,6 +76,7 @@
             {{/see-also-present}}
             <p>{{#prev}}<a href="{{prev}}">⇐ Previous</a>{{/prev}} {{#next}}<a href="{{next}}">Next ⇒</a>{{/next}}</p>
             {{{__advert}}}
+            <h2>Popular tags</h2>
             {{{tagcloud}}}
         </div>
         <div id="sidebar">
