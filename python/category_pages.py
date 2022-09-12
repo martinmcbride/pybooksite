@@ -2,6 +2,8 @@
 # Created: 2022-04-21
 # Copyright (c) 2022, Martin McBride
 # License: MIT
+from python.webpages import normalise_webpage_dictionary
+
 
 def create_category_linkname(category):
     return 'category-' + category.replace(' ', '-')
@@ -9,7 +11,7 @@ def create_category_linkname(category):
 def create_category_link(category):
     return '/categories/' + create_category_linkname(category) + '/'
 
-def create_category_page(category, webpages):
+def create_category_page(category, webpages, config):
     """
     Create a page for a particular category
     :param category: Category name
@@ -34,10 +36,11 @@ def create_category_page(category, webpages):
         content += '</ol>'
 
     categorypage = dict(title=title, content=content, tags=[], categories=[], path=path, meta=meta)
+    normalise_webpage_dictionary(categorypage, config)
 
     return categorypage
 
-def create_allcategory_page(webpages):
+def create_allcategory_page(webpages, config):
     """
     Create a page listing all categories
     :param webpages:
@@ -67,9 +70,10 @@ def create_allcategory_page(webpages):
         content += ', '.join(['<a href="' + p + '">' + t + '</a>' for t, p in initial_entries])
 
     categorypage = dict(title=title, content=content, tags=[], categories=[], path="/categories/", meta=meta)
+    normalise_webpage_dictionary(categorypage, config)
     return categorypage
 
-def create_all_categories(webpages):
+def create_all_categories(webpages, config):
     """
     Create all the required category pages. That includes a page for every individual category and the all categories
     page.
@@ -83,9 +87,9 @@ def create_all_categories(webpages):
 
     categorypages = []
     for category in categories:
-        categorypages.append(create_category_page(category, webpages))
+        categorypages.append(create_category_page(category, webpages, config))
 
-    allcategories = create_allcategory_page(webpages)
+    allcategories = create_allcategory_page(webpages, config)
     categorypages.append(allcategories)
 
     return categorypages

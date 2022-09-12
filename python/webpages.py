@@ -9,6 +9,16 @@ import markdown
 import fragments
 import page_utils
 
+def normalise_webpage_dictionary(page_dict, config):
+    # If short title is not present, use the title instead
+    page_dict["shorttitle"] = page_dict.get("shorttitle", page_dict.get("title", ""))
+    # If seo title is not present, use the sitename + title instead
+    page_dict["seotitle"] = page_dict.get("seotitle", " - ".join([config.get("site-name", ""), page_dict.get("title", "")]))
+
+    # tags and categories should be empty tuple if not present
+    page_dict["tags"] = page_dict.get("tags", [])
+    page_dict["categories"] = page_dict.get("categories", [])
+
 def read_webpage_file(base, path, name):
     """
     Read a page file consisting of a yaml header and a markdown body (both optional)
@@ -109,14 +119,7 @@ def create_webpage_dictionary(config, yaml_dict, html, path, name, fragments_dic
     # Create a path.
     yaml_dict["path"] = page_utils.get_webpage_path(path, name)
 
-    # If short title is not present, use the title instead
-    yaml_dict["shorttitle"] = yaml_dict.get("shorttitle", yaml_dict.get("title", ""))
-    # If seo title is not present, use the sitename + title instead
-    yaml_dict["seotitle"] = yaml_dict.get("seotitle", " - ".join([config.get("site-name", ""), yaml_dict.get("title", "")]))
-
-    # tags and categories should be empty tuple if not present
-    yaml_dict["tags"] = yaml_dict.get("tags", [])
-    yaml_dict["categories"] = yaml_dict.get("categories", [])
+    normalise_webpage_dictionary(yaml_dict, config)
 
     # Update fragments with dynamic content
     fragments.replace_fragments(fragments_dict, yaml_dict)

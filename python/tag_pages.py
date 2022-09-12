@@ -2,6 +2,8 @@
 # Created: 2022-04-21
 # Copyright (c) 2022, Martin McBride
 # License: MIT
+from python.webpages import normalise_webpage_dictionary
+
 
 def create_tag_linkname(tag):
     return 'tag-' + tag.replace(' ', '-')
@@ -9,7 +11,7 @@ def create_tag_linkname(tag):
 def create_tag_link(tag):
     return '/tags/' + create_tag_linkname(tag) + '/'
 
-def create_tag_page(tag, webpages):
+def create_tag_page(tag, webpages, config):
     """
     Create a page for a particular tag
     :param tag: Tag name
@@ -34,10 +36,11 @@ def create_tag_page(tag, webpages):
         content += '</ol>'
 
     tagpage = dict(title=title, content=content, tags=[], categories=[], path=path, meta=meta)
+    normalise_webpage_dictionary(tagpage, config)
 
     return tagpage
 
-def create_alltag_page(webpages):
+def create_alltag_page(webpages, config):
     """
     Create a page listing all tags
     :param webpages:
@@ -68,9 +71,11 @@ def create_alltag_page(webpages):
         content += ', '.join(['<a href="' + p + '">' + t + '</a>' for t, p in initial_entries])
 
     tagpage = dict(title=title, content=content, tags=[], categories=[], path="/tags/", meta=meta)
+    normalise_webpage_dictionary(tagpage, config)
+
     return tagpage
 
-def create_all_tags(webpages):
+def create_all_tags(webpages, config):
     """
     Create all the required tag pages. That includes a page for every individual tag and the all tags
     page.
@@ -84,9 +89,9 @@ def create_all_tags(webpages):
 
     tagpages = []
     for tag in tags:
-        tagpages.append(create_tag_page(tag, webpages))
+        tagpages.append(create_tag_page(tag, webpages, config))
 
-    alltags = create_alltag_page(webpages)
+    alltags = create_alltag_page(webpages, config)
     tagpages.append(alltags)
 
     return tagpages
