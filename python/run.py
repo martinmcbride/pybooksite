@@ -22,6 +22,6 @@ site_structure = create_site_structure.create_site_structure(webpages)
 tagpages = tag_pages.create_all_tags(webpages, config)
 tagcloud = tag_pages.create_tag_cloud(webpages)
 categorypages = category_pages.create_all_categories(webpages, config)
-indexpages = create_index_pages.create_index_pages(webpages)
+indexpages = create_index_pages.create_index_pages(webpages, config)
 create_site.generate_site(config, html_template, config["public"], [webpages, tagpages, categorypages, indexpages],
                           site_structure, config["site-url"], tagcloud)

@@ -3,6 +3,7 @@
 # Copyright (c) 2022, Martin McBride
 # License: MIT
 from python.create_site_structure import is_blog_page
+from python.webpages import normalise_webpage_dictionary
 
 month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ]
 
@@ -15,7 +16,7 @@ def get_month_year(date):
     month = int(date[5:7]) - 1
     return month_names[month] + ' ' + date[0:4]
 
-def create_recent_pages_page(webpages):
+def create_recent_pages_page(webpages, config):
     """
     Create a recent pages page containing up to 50 of the most recent pages, ordered by the most recent,
     split by month.
@@ -47,9 +48,10 @@ def create_recent_pages_page(webpages):
     content += '</ol>'
 
     recentpage = dict(title=title, content=content, tags=[], categories=[], path="/recent/", meta=meta)
+    normalise_webpage_dictionary(recentpage, config)
     return recentpage
 
-def create_blog_pages_page(webpages):
+def create_blog_pages_page(webpages, config):
     """
     Create a blog pages page containing all blog pages, ordered by the most recent,
     split by month.
@@ -80,9 +82,10 @@ def create_blog_pages_page(webpages):
     content += '</ol>'
 
     blogpage = dict(title=title, content=content, tags=[], categories=[], path="/blog/")
+    normalise_webpage_dictionary(blogpage, config)
     return blogpage
 
-def create_all_pages_page(webpages):
+def create_all_pages_page(webpages, config):
     """
     Create an "all pages" page containing every page, ordered alphabetically, split by first letter.
     :param webpages: List of pages
@@ -116,15 +119,16 @@ def create_all_pages_page(webpages):
         content += '</ol>'
 
     indexpage = dict(title=title, content=content, tags=[], categories=[], path="/all/", meta=meta)
+    normalise_webpage_dictionary(indexpage, config)
     return indexpage
 
-def create_index_pages(webpages):
+def create_index_pages(webpages, config):
     """
     Create all index pages
     :param webpages:
     :return: list of all index pages
     """
-    return [create_all_pages_page(webpages),
-            create_recent_pages_page(webpages),
-            create_blog_pages_page(webpages),
+    return [create_all_pages_page(webpages, config),
+            create_recent_pages_page(webpages, config),
+            create_blog_pages_page(webpages, config),
             ]
