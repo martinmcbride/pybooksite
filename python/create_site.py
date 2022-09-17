@@ -15,7 +15,7 @@ import create_site_structure
 import tag_pages
 
 def create_canonical_link(config, path):
-    return config["site-url"] + "/" + path
+    return config["site-url"] + path
 
 def get_public_path_for_page(public_path, filepath):
     """
