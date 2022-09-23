@@ -1,0 +1,130 @@
+img {
+    max-width: 100%;
+    height: auto;
+ }
+
+blockquote {
+    border-left-color: darkslategrey;
+    border-left-style: solid;
+    border-left-width: 6px;
+    padding-left: 20px;
+    margin-bottom: 1rem;
+    background-color: #b0d0d0;
+}
+
+.notebox {
+    border-left-color: dodgerblue;
+    border-left-style: solid;
+    border-left-width: 6px;
+    padding-left: 20px;
+    margin-bottom: 1rem;
+    background-color: #81c1ff;
+}
+
+.tipbox {
+    border-left-color: gold;
+    border-left-style: solid;
+    border-left-width: 6px;
+    padding-left: 20px;
+    margin-bottom: 1rem;
+    background-color: #ffeb81;
+}
+
+.warnbox {
+    border-left-color: crimson;
+    border-left-style: solid;
+    border-left-width: 6px;
+    padding-left: 20px;
+    margin-bottom: 1rem;
+    background-color: #f58ba0;
+}
+
+table {
+    margin-bottom: 2em;
+    margin-top: 1em;
+    border: none;
+}
+
+th {
+    background-color: #b0d0d0;
+    border: none;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: top;
+    text-align: left;
+    display: table-cell;
+    font-weight: bold;
+}
+
+td {
+    padding-left: 1em;
+    padding-right: 1em;
+    border: none;
+    vertical-align: top;
+    text-align: left;
+    display: table-cell;
+}
+
+.toc-title {
+}
+
+.toc-title-current {
+    color: black;
+}
+
+.chapter-toc {
+}
+
+.chapter-toc-current {
+    color: black;
+}
+
+.page-toc {
+    padding-left: 1em;
+}
+
+.page-toc-current {
+    padding-left: 1em;
+    color: black;
+}
+
+.tagcloud0 {
+    font-size: 1.2em;
+}
+
+.tagcloud1 {
+    font-size: 1.2em;
+}
+
+.tagcloud2 {
+    font-size: 1.2em;
+}
+.tagcloud3 {
+    font-size: 1.35em;
+}
+
+.tagcloud4 {
+    font-size: 1.48em;
+}
+
+.tagcloud5 {
+    font-size: 1.62em;
+}
+
+.tagcloud6 {
+    font-size: 1.76em;
+}
+
+.tagcloud7 {
+    font-size: 1.91em;
+}
+
+.tagcloud8 {
+    font-size: 2.05em;
+}
+
+.tagcloud9 {
+    font-size: 2.12em;
+}

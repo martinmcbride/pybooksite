@@ -15,7 +15,7 @@ def get_fragments(config):
 
     fragments_dict = dict()
     theme = config["theme"]
-    fragments_path = os.path.join("themes", theme, "fragments")
+    fragments_path = os.path.join("fragments")
 
     for dirpath, dirs, files in os.walk(fragments_path):
         for file in files:

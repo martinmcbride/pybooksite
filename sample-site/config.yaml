@@ -1,8 +1,9 @@
-theme: html-theme
+theme: bootstrap-theme
 site-name: test-site
 site-url: https://www.example.com
 public: public
 copyright: Copyright pybooksite 2022
+favicon: /img/favicon.ico
 menu:
   Home: /
   About: /about/
@@ -14,4 +15,6 @@ mathjax: true
 social:
   Twitter: twitter.com
   Github: github.com
-__advert: ad2.html
+__top: top1.html
+__bottom: bottom1.html
+__side: side1.html

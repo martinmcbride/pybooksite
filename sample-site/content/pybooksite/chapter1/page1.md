@@ -12,7 +12,6 @@ categories:
  - pybooksite
  - book
 weight: 1000
-__advert: ad2.html
 ---
 
 Page 1 of Introduction to pybooksite.

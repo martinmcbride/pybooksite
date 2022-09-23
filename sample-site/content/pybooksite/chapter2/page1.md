@@ -11,7 +11,7 @@ categories:
  - pybooksite
  - book
 weight: 1000
-__advert: ad1.html
+__bottom: bottom1.html
 ---
 
 Page 1 of Advanced pybooksite.

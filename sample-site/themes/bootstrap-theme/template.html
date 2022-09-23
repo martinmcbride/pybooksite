@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        {{#meta}}
+            <meta name="description" content="{{meta}}">
+        {{/meta}}
+        {{#meta}}
+            <meta name="author" content="{{meta}}">
+        {{/meta}}
+        {{#author}}
+            <meta name="author" content="{{author}}" />
+        {{/author}}
+        <title>{{seotitle}}</title>
+        {{#canonical}}
+            <link rel="canonical" href="{{canonical}}">
+        {{/canonical}}
+        <!-- Favicon-->
+        {{#favicon}}
+            <link rel="icon" type="image/x-icon" href="{{favicon}}" />
+        {{/favicon}}
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet" />
+        <link href="/css/hilite.css" rel="stylesheet" />
+        <link href="/css/extra.css" rel="stylesheet" />
+        {{#googleadsense}}
+            <script type="text/javascript">
+                google_ad_client = "{{googleadsense}}";
+                google_ad_slot = "{{googleadsenseslot}}";
+                google_ad_width = 728;
+                google_ad_height = 90;
+            </script>
+        {{/googleadsense}}
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">{{site-name}}</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {{#menu}}
+                            <li class="nav-item"><a class="nav-link" href="{{link}}">{{title}}</a></li>
+                        {{/menu}}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page content-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{title}}</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">
+                            {{#author}}
+                                By {{.}},
+                            {{/author}}
+                            {{#date}}
+                               {{.}}
+                            {{/date}}
+                            </div>
+                            <!-- Post categories-->
+                            {{#tags-present}}
+                                Tags:
+                                {{#tag-items}}
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="{{link}}">{{title}}</a>
+                                {{/tag-items}}
+                            {{/tags-present}}
+                            {{#categories-present}}
+                                <br>Categories:
+                                {{#category-items}}
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="{{link}}">{{title}}</a>
+                                {{/category-items}}
+                            {{/categories-present}}
+                        </header>
+                        <!-- Preview image figure-->
+                        {{#pageimage}}
+                            <figure class="mb-4"><img class="img-fluid rounded" src="{{pageimage}}" alt="..." /></figure>
+                        {{/pageimage}}
+                        {{#googleadsense}}
+                            <script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+                            </script>
+                        {{/googleadsense}}
+                        <!-- Post content-->
+                        {{{__top}}}
+                        <section class="mb-5">
+                            <div class="fs-5 mb-4">
+                            {{{content}}}
+                            {{#see-also-present}}
+                                <h2>See also</h2>
+                                <ul>
+                                {{#see-also}}
+                                    <li><a href="{{link}}">{{title}}</a></li>
+                                {{/see-also}}
+                                </ul>
+                            {{/see-also-present}}
+                            </div>
+                            <h2 class="fw-bolder mb-4 mt-5">Formatted header - REMOVE</h2>
+                            <p class="fs-5 mb-4">Formatted text - REMOVE</p>
+                        </section>
+                        {{{__bottom}}}
+                        <section>
+                            <h2>Popular tags</h2>
+                            <p>{{{tagcloud}}}</p>
+                        </section>
+                    </article>
+                </div>
+                <!-- Side widgets-->
+                <div class="col-lg-4">
+                   {{{__side}}}
+                   <!-- Book widget-->
+                    {{#toc-title}}
+                        <div class="card mb-4">
+                            <div class="card-header"><a href="{{link}}"><span class="{{style}}">{{title}}</span></div>
+                            <div class="card-body">
+                                <ul class="list-unstyled mb-0">
+                                    {{#toc}}
+                                        <li><a href="{{link}}"><span class="{{style}}">{{title}}</span></a></li>
+                                    {{/toc}}
+                                </ul>
+                            </div>
+                        </div>
+                    {{/toc-title}}
+                   <!-- Navigation widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Navigation</div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="/recent/">Recent</a></li>
+                                <li><a href="/tags/">Tags</a></li>
+                                <li><a href="/categories/">Categories</a></li>
+                                <li><a href="/all/">Site map</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                   <!-- Links widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Links</div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                {{#social}}
+                                    <li><a href="{{link}}">{{title}}</a></li>
+                                {{/social}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">{{copyright}}</p>
+                <p class="m-0 text-center text-white">Made with <a href="https://github.com/martinmcbride/pybooksite">pybooksite</a></p>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/js/scripts.js"></script>
+        {{#googleanalytics}}
+            <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', '{{googleanalytics}}', 'auto');
+              ga('send', 'pageview');
+            </script>
+        {{/googleanalytics}}
+        {{#mathjax}}
+            <script>
+            MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              },
+              svg: {
+                fontCache: 'global'
+              }
+            };
+            </script>
+            <script type="text/javascript" id="MathJax-script" async
+              src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+            </script>
+        {{/mathjax}}
+    </body>
+</html>

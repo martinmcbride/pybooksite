@@ -13,6 +13,9 @@ categories:
  - pybooksite
  - book
 weight: 2000
+__top: top2.html
+__bottom: bottom2.html
+__side: side2.html
 ---
 
 Page 2 of Introduction to pybooksite.
