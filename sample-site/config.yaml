@@ -3,7 +3,7 @@ site-name: test-site
 site-url: https://www.example.com
 public: public
 copyright: Copyright pybooksite 2022
-favicon: /img/favicon.ico
+favicon: /img/favicon.png
 menu:
   Home: /
   About: /about/
