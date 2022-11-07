@@ -155,6 +155,24 @@ def copy_static_files(config, public_path):
     theme_static_path = os.path.join("themes", theme, "static")
     copytree(theme_static_path, public_path)
 
+def remove_tree(path):
+    """
+    Remove all files and folders except top level .git folder from tree
+    :param path:
+    :return:
+    """
+
+    with os.scandir(path) as entries:
+        for entry in entries:
+            if entry.is_file():
+                logging.info("Deleting top level file", entry.name)
+                os.remove(os.path.join(path, entry.name))
+            else:
+                if entry.name==".git":
+                    logging.info("Ignoring .git folder")
+                else:
+                    logging.info("Deleting top level folder", entry.name)
+                    shutil.rmtree(os.path.join(path, entry.name), ignore_errors=False, onerror=None)
 
 def write_site_webpages(config, html_template, public_path, webpages_list, site_structure, tagcloud):
     """
@@ -167,7 +185,7 @@ def write_site_webpages(config, html_template, public_path, webpages_list, site_
     """
 
     try:
-        shutil.rmtree(public_path, ignore_errors=False, onerror=None)
+        remove_tree(public_path)
     except Exception as e:
         logging.info("Failed to delete public area", public_path)
         logging.info(e)
