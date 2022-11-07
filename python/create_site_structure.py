@@ -93,7 +93,7 @@ def add_pages_to_site_structure(webpages, site_structure):
                 if webpage.get("book", None) in site_structure and webpage.get("chapter", None) in site_structure[webpage["book"]].children:
                     site_structure[webpage["book"]].children[webpage["chapter"]].children[webpage["title"]] = PageItem(webpage, webpage.get("weight", 0), None)
                 else:
-                    logging.error("Page references a book or chapter that isn't defined", webpage.get("book", None))
+                    logging.error("Page references a book or chapter that isn't defined", webpage.get("book", None), webpage.get("chapter", None), webpage.get("title", None))
                     raise Exception()
             else:
                 logging.error("Page missing a book or chapter entry", webpage.get("path", "unknown path"))
