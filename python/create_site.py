@@ -24,6 +24,8 @@ def get_public_path_for_page(public_path, filepath):
     :param filepath: html path for this page
     :return: full path of directory, full path of html file as a tuple
     """
+    if filepath=="/404/":
+        return public_path, os.path.join(public_path, "404.html")
     directory = public_path + filepath
     html_name = 'index.html'
     html_path = os.path.join(directory, html_name)
