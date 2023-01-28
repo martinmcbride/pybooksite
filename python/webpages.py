@@ -19,6 +19,11 @@ def normalise_webpage_dictionary(page_dict, config):
     page_dict["tags"] = page_dict.get("tags", [])
     page_dict["categories"] = page_dict.get("categories", [])
 
+    # Pages are indexable by default. This controls whether page appears in indexes
+    page_dict["indexable"] = page_dict.get("indexable", True)
+
+
+
 def read_webpage_file(base, path, name):
     """
     Read a page file consisting of a yaml header and a markdown body (both optional)
