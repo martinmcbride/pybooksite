@@ -15,7 +15,7 @@ def normalise_webpage_dictionary(page_dict, config):
     # If seo title is not present, use the sitename + title instead
     page_dict["seotitle"] = page_dict.get("seotitle", " - ".join([config.get("site-name", ""), page_dict.get("title", "")]))
 
-    # tags and categories should be empty tuple if not present
+    # tags, categories, and level should be empty tuple if not present
     page_dict["tags"] = page_dict.get("tags", [])
     page_dict["categories"] = page_dict.get("categories", [])
 
@@ -131,9 +131,22 @@ def create_webpage_dictionary(config, yaml_dict, html, path, name, fragments_dic
 
     return yaml_dict
 
+
+def check_deferred_page(yaml_dict):
+    """
+    Check data of page against today's date, return true if page date > today's date
+    @param yaml_dict:
+    @return:
+    """
+    date = yaml_dict.get("date")
+    today = date.today()
+    return date > today
+
 def load_webpage(config, base, path, name, fragments_dict):
     """
-    Load a page md file
+    Load a page md file. Also check two special cases:
+    * If draft is true, return None so the page is excluded.
+    * If publication date is later than today, replace the page content with a "coming soon" message.
     :param base: base path to content area
     :param path: path of this page within the content area
     :param name: name of md file
@@ -145,6 +158,10 @@ def load_webpage(config, base, path, name, fragments_dict):
 
     if yaml_dict.get("draft", False):  # If page is draft, return None to indicate it should be ignored.
         return None
+
+    if check_deferred_page(yaml_dict):
+        release_date = yaml_dict.get("date")
+        markdown_data = f"Coming soon. This article will be released on {release_date}"
 
     html = convert_markdown_to_html(markdown_data, path, name)
 
