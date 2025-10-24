@@ -2,6 +2,8 @@
 # Created: 2022-04-21
 # Copyright (c) 2022, Martin McBride
 # License: MIT
+from datetime import date
+
 from python.create_site_structure import is_blog_page
 from python.webpages import normalise_webpage_dictionary
 
@@ -26,9 +28,10 @@ def create_recent_pages_page(webpages, config):
     meta = "List of recent pages"
     entries = []
     for webpage in webpages:
-        entries.append((webpage["title"], webpage["path"], str(webpage.get("date", ""))))
+        if webpage["date"] <= date.today() and webpage.get("type", None)=="page":
+            entries.append((webpage["title"], webpage["path"], str(webpage.get("date", ""))))
     entries.sort(key=lambda x: x[2], reverse=True)
-    entries = entries[:50]
+    #entries = entries[:50]
     title = 'Most recent ' + str(len(entries)) + ' articles'
 
     content = ''
@@ -60,8 +63,9 @@ def create_blog_pages_page(webpages, config):
     """
     entries = []
     for webpage in webpages:
-        if is_blog_page(webpage):
-            entries.append((webpage["title"], webpage["path"], str(webpage.get("date", ""))))
+        if webpage["date"] <= date.today():
+            if is_blog_page(webpage):
+                entries.append((webpage["title"], webpage["path"], str(webpage.get("date", ""))))
     entries.sort(key=lambda x: x[2], reverse=True)
     title = 'All blog posts'
 
